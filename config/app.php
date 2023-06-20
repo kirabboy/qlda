@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'vi',
 
     /*
     |--------------------------------------------------------------------------
@@ -163,6 +163,8 @@ return [
         /*
          * Application Service Providers...
          */
+        Yajra\DataTables\ButtonsServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
