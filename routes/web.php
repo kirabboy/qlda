@@ -7,13 +7,9 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\EmployeeController;
-
-=======
 use App\Http\Controllers\AdminController;
->>>>>>> dung
+use App\Http\Controllers\AccountController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,11 +21,9 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 Route::get('/', function () {
     return view('index');
-=======
+});
 
 
 Route::middleware(['auth'])->group(function () {
@@ -53,23 +47,9 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('sign-out', [AuthController::class, 'sign_out'])->name('sign.out');
->>>>>>> nhan
 });
 
 
-<<<<<<< HEAD
-/* Auth */
-Route::middleware(['guest'])->group(function () {
-    Route::get('sign-in', [AuthController::class, 'sign_in'])->name('sign-in');
-    Route::post('sign-in', [AuthController::class, 'sign_in_action'])->name('sign-in.action');
-});
-/* Ckfinder */
-Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
-    ->name('ckfinder_connector');
-
-Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
-    ->name('ckfinder_browser');
-=======
 
 Route::prefix('account')->group(function(){
         Route::get('', [AccountController::class, 'index'])
@@ -110,8 +90,6 @@ Route::prefix('employee')->group(function(){
         Route::get('delete/{id}', [AccountController::class, 'delete'])
             ->name('employee.delete');
     });
->>>>>>> ton
-=======
 Route::get('/', [AdminController::class, 'index'])->name('home');
 
 Route::get('signin', [AdminController::class, 'signinform'])->name('signin');
@@ -121,4 +99,3 @@ Route::get('register', [AdminController::class, 'registerform'])->name('register
 Route::post('register', [AdminController::class, 'register'])->name('register');
 
 Route::get('forgotpw', [AdminController::class, 'forgotpw'])->name('forgotpw');
->>>>>>> dung
