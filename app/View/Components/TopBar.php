@@ -6,15 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class sidebar extends Component
+class TopBar extends Component
 {
-    public $sidebar;
     /**
      * Create a new component instance.
      */
     public function __construct()
-    {   
-        $this->sidebar = config('sidebar');
+    {
+        //
     }
 
     /**
@@ -22,6 +21,6 @@ class sidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.sidebar');
+        return view('components.top-bar');
     }
 }

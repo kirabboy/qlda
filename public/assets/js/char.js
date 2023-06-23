@@ -6,7 +6,7 @@ Highcharts.chart('pie_gradient', {
         type: 'pie'
     },
     title: {
-        text: 'Tỷ lệ dự án theo tình trạng',
+        text: pie_gradient,
         align: 'center'
     },
     tooltip: {
@@ -31,9 +31,9 @@ Highcharts.chart('pie_gradient', {
     series: [{
         name: 'Tỷ lệ',
         data: [
-            { name: 'Hoàn thành', y: count_approved },
-            { name: 'Chưa hoàn thành', y: count_rejected },
-            { name: 'Mới cập nhật', y: count_submitted },
+            { name: approved, color: '#2fb36a',  y: count_approved },
+            { name: rejected, color: '#d83939', y: count_rejected },
+            { name: submitted, color: 'yellow',  y: count_submitted },
         ]
     }],
     credits: {

@@ -3,10 +3,7 @@ Highcharts.chart('column_basic', {
         type: 'column'
     },
     title: {
-        text: 'Số lượng dự án qua các tháng'
-    },
-    subtitle: {
-        text: 'Theo tình trạng'
+        text: column_basic
     },
     xAxis: {
         categories: months,
@@ -15,7 +12,7 @@ Highcharts.chart('column_basic', {
     yAxis: {
         min: 0,
         title: {
-            text: 'Số lượng dự án'
+            text: 'Number of projects'
         }
     },
     tooltip: {
@@ -33,7 +30,7 @@ Highcharts.chart('column_basic', {
         }
     },
     series: [{
-        name: 'Dự án',
+        name: project,
         data: count_month
 
     }],

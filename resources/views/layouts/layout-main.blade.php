@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Dashboard</title>
-    
+
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css?1674944402') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/tabler-flags.min.css?1674944402') }}" rel="stylesheet" />
@@ -21,8 +21,6 @@
     <link rel="stylesheet" href="{{ asset('libs/Parsley/parsley.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
-
-
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -35,11 +33,11 @@
         }
 
         #column_basic {
-            height: 50vh;
+            height: 60vh;
         }
 
         #pie_gradient {
-            height: 50vh;
+            height: 60vh;
         }
     </style>
 </head>
@@ -88,7 +86,7 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             }
-            toastr["success"]("{{ Session::get('success') }}", "Thông báo")
+            toastr["success"]("{{ Session::get('success') }}", "{{ __('Notification') }}")
         @endif
         @if (Session::has('error'))
             toastr.options = {
@@ -108,10 +106,15 @@
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             }
-            toastr["error"]("{{ Session::get('error') }}", "Thông báo")
+            toastr["error"]("{{ Session::get('error') }}", "{{ __('Notification') }}")
         @endif
     </script>
-
+    <script>
+        var all = "@lang('All')";
+        var placeholder = "@lang('placeholder')";
+        var selectEmployee = "@lang('Select employee')";
+        var selectProject = "@lang('Select project')";
+    </script>
 
     <!-- Ckeditor & Ckfinder-->
     <script>
@@ -120,7 +123,6 @@
         });
     </script>
     @include('ckfinder::setup')
-
 
 
     <script src="{{ asset('libs/hightchart/highcharts.js') }}"></script>

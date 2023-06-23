@@ -25,7 +25,7 @@ class ProjectsFactory extends Factory
             'ref' => $this->faker->text(20),
             'planning' => $this->faker->text(20),
             'status' => $this->faker->numberBetween($min = 0, $max = 2),
-            'date_cre' => $this->faker->DateTime(),
+            'date_cre' => $this->faker->unique()->dateTimeBetween('-7 days', '+2 months'),
             'version' => $this->faker->randomDigit(),
             'sample_status_MA' => $this->faker->numberBetween($min = 0, $max = 2),
             'file_upload' => $this->faker->imageUrl($width = 200, $height = 200),

@@ -13,6 +13,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\App;
 
 class ProjectReportDataTable extends DataTable
 {
@@ -27,11 +28,11 @@ class ProjectReportDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->editColumn('status', function (Project_report $project_report) {
                 if ($project_report->status->key == ProjectReportStatus::getKey(0)) {
-                    $status = '<span class="badge bg-green-lt">' . ProjectReportStatus::getDescription(0) . '</span>';
+                    $status = '<span class="badge bg-green-lt">' . __(ProjectReportStatus::getKey(0)) . '</span>';
                 } else if ($project_report->status->key ==  ProjectReportStatus::getKey(2)) {
-                    $status = '<span class="badge bg-yellow-lt">' . ProjectReportStatus::getDescription(2) . '</span>';
+                    $status = '<span class="badge bg-yellow-lt">' . __(ProjectReportStatus::getKey(2)) . '</span>';
                 } else {
-                    $status = '<span class="badge bg-red-lt">' . ProjectReportStatus::getDescription(1) . '</span>';
+                    $status = '<span class="badge bg-red-lt">' . __(ProjectReportStatus::getKey(1)) . '</span>';
                 }
                 return $status;
             })
@@ -49,7 +50,27 @@ class ProjectReportDataTable extends DataTable
             data-route="' . route('project.report.destroy', $data->id) . '"> <i class="fa-solid fa-trash"></i></button>';
                 return $button;
             })
-            ->rawColumns(['status', 'title_report', 'action', 'employee_id'])
+            ->editColumn('file_report', function($data){
+                return '<p>"'.$data->file_report.'" <a class="float-end"
+                href="'.route('download.file', $data->file_report) .'">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-download"
+                    width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor"
+                    fill="none" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z"
+                        fill="none">
+                    </path>
+                    <path
+                        d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2">
+                    </path>
+                    <path d="M7 11l5 5l5 -5"></path>
+                    <path d="M12 4l0 12"></path>
+                </svg>
+                </a></p>';
+            })
+            ->rawColumns(['status', 'title_report', 'action', 'employee_id', 'file_report'])
             ->setRowId('id');
     }
 
@@ -71,6 +92,12 @@ class ProjectReportDataTable extends DataTable
      */
     public function html(): HtmlBuilder
     {
+        $locale = App::currentLocale();
+        if($locale == 'vi'){
+            $url = url('libs/js/vi_datatable.json');
+        }else{
+            $url = url('libs/js/en_datatable.json');
+        }
         return $this->builder()
             ->setTableId('projectreport-table')
             ->columns($this->getColumns())
@@ -91,7 +118,7 @@ class ProjectReportDataTable extends DataTable
              }")
             ->parameters([
                 'language' => [
-                    'url' => url('libs/js/language.json')
+                    'url' => $url
                 ],
             ]);
     }
@@ -105,13 +132,14 @@ class ProjectReportDataTable extends DataTable
     {
         return [
             Column::make('id')->title('#')->addClass('text-center'),
-            Column::make('title_report')->title('Tiêu đề')->addClass('text-center'),
-            Column::make('employee_id')->title('Nhân viên')->addClass('text-center'),
-            Column::make('project_id')->title('Dự án')->addClass('text-center'),
-            Column::make('date_cre_report')->title('Ngày tạo')->addClass('text-center')->visible(false),
-            Column::make('note')->title('Ghi chú')->addClass('text-center'),
-            Column::make('status')->title('Trạng thái')->addClass('text-center'),
-            Column::computed('action')->title('Thao tác')
+            Column::make('title_report')->title(__('Title'))->addClass('text-center'),
+            Column::make('employee_id')->title(__('Employee'))->addClass('text-center')->visible(false),
+            Column::make('project_id')->title(__('project'))->addClass('text-center'),
+            Column::make('date_cre_report')->title(__('Date created'))->addClass('text-center'),
+            Column::make('note')->title(__('Note'))->addClass('text-center'),
+            Column::make('status')->title(__('Status'))->addClass('text-center'),
+            Column::make('file_report')->title(__('File upload')),
+            Column::computed('action')->title(__('Action'))
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)

@@ -33,6 +33,16 @@
 <!-- Tabler Core -->
 <script src="{{ asset('dist/js/tabler.min.js?1674944402') }}" defer></script>
 <script src="{{ asset('dist/js/demo.min.js?1674944402') }}" defer></script>
+<script>
+    function showPassword(params) {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 </body>
 
 </html>

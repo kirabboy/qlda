@@ -13,6 +13,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\App;
 
 class DashboardDataTable extends DataTable
 {
@@ -27,22 +28,18 @@ class DashboardDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->editColumn('status', function (Projects $projects) {
                 if ($projects->status->key == Projectstatus::getKey(0)) {
-                    $status = '<span class="badge bg-green-lt">' . Projectstatus::getDescription(0) . '</span>';
+                    $status = '<span class="badge bg-green-lt">' . __(Projectstatus::getKey(0)) .'</span>';
                 } else if ($projects->status->key ==  Projectstatus::getKey(2)) {
-                    $status = '<span class="badge bg-yellow-lt">' . Projectstatus::getDescription(2) . '</span>';
+                    $status = '<span class="badge bg-yellow-lt">' .  __(Projectstatus::getKey(2)) .'</span>';
                 } else {
-                    $status = '<span class="badge bg-red-lt">' . Projectstatus::getDescription(1) . '</span>';
+                    $status = '<span class="badge bg-red-lt">' .  __(Projectstatus::getKey(1)) .'</span>';
                 }
                 return $status;
             })
             ->editColumn('name_project', function ($data) {
-                if (auth()->user()->roles->value == 1) {
-                    return '<a href="#"> "' . $data->name_project . '"<a/>';
-                } else {
-                    return '<a href="' . route('project.edit', $data->id) . '"> "' . $data->name_project . '"<a/>';
-                }
+                return '<a href="' . route('project.edit', $data->id) . '"> "' . $data->name_project . '"<a/>';
             })
-            ->editColumn('date_cre', function($data){
+            ->editColumn('date_cre', function ($data) {
                 return date('d/m/Y', strtotime($data->date_cre));
             })
             ->addColumn('employee_count', function ($data) {
@@ -67,8 +64,21 @@ class DashboardDataTable extends DataTable
      *
      * @return \Yajra\DataTables\Html\Builder
      */
+    // public function getUrl() {
+    //     $locale = App::currentLocale();
+    //     if($locale == 'vi'){
+    //         $url = url('libs/js/language.json');
+    //     }
+    //     return $url;
+    // }
     public function html(): HtmlBuilder
-    {
+    {    
+        $locale = App::currentLocale();
+        if($locale == 'vi'){
+            $url = url('libs/js/vi_datatable.json');
+        }else{
+            $url = url('libs/js/en_datatable.json');
+        }
         return $this->builder()
             ->setTableId('projects-table')
             ->columns($this->getColumns())
@@ -89,9 +99,9 @@ class DashboardDataTable extends DataTable
                      }")
             ->parameters([
                 'language' => [
-                    'url' => url('libs/js/language.json')
+                    'url' =>   $url
                 ],
-            ]);;
+            ]);
     }
 
     /**
@@ -103,11 +113,11 @@ class DashboardDataTable extends DataTable
     {
         return [
             Column::make('id')->title('#')->addClass('text-center'),
-            Column::make('name_project')->title('Tên dự án')->addClass('text-center'),
-            Column::make('status')->title('Trạng thái')->addClass('text-center'),
+            Column::make('name_project')->title(__('Name project'))->addClass('text-center'),
+            Column::make('status')->title(__('Status'))->addClass('text-center'),
             // Column::make('planning'),     
-            Column::make('date_cre')->title('Ngày tạo')->addClass('text-center'),
-            Column::make('employee_count')->title('Số lượng NV')->addClass('text-center'),
+            Column::make('date_cre')->title(__('Date created'))->addClass('text-center'),
+            Column::make('employee_count')->title(__('count employee'))->addClass('text-center'),
 
         ];
     }

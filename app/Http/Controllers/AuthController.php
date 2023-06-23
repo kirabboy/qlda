@@ -12,7 +12,7 @@ class AuthController extends Controller
         return view('auth.sign-in');
     }
     public function sign_in_action(Request $request){
-        $credentials = $request->only('username', 'email','password');     
+        $credentials = $request->only('username', 'email', 'password');  
         $field = filter_var($credentials['username'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
         if (Auth::attempt([$field => $credentials['username'], 'password' => $credentials['password']])) {
             return redirect()->route('dashboard')
