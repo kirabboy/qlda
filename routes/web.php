@@ -15,8 +15,8 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [AdminController::class, 'index'])->name('home');
 
-Route::get('signin', [AdminController::class, 'signinform'])->name('signin');
-Route::post('/signin', [AdminController::class, 'signin'])->name('signin');
+Route::get('signin', [AdminController::class, 'signinform'])->name('signin-form-login');
+Route::post('signin', [AdminController::class, 'signin'])->name('signin');
 
 Route::get('register', [AdminController::class, 'registerform'])->name('register');
 Route::post('register', [AdminController::class, 'register'])->name('register');

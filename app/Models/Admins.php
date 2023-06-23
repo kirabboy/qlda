@@ -30,9 +30,9 @@ class Admins extends Authenticatable
         'gender',
         'avatar',
         'address',
-        'email_verified_at',
+        // 'email_verified_at',
         'password',
-        'remember_token',
+        // 'remember_token',
         'roles'
     ];
 

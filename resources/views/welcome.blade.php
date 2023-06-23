@@ -411,11 +411,10 @@
             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                 @auth
                     <a href="#" class="text-sm text-gray-700 dark:text-gray-500 underline">Hi,
-                        {{ auth()->user()->name }}</a>
-                    <a href="{{ route('signOut') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Logout</a>
+                        {{ auth()->admins()->name }}</a>
+                    <a href="{{ route('signout') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Logout</a>
                 @else
                     <a href="{{ route('signin') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}"
                             class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
