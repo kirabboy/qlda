@@ -7,6 +7,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+<<<<<<< HEAD
 /* Auth */
 Route::middleware(['guest'])->group(function () {
     Route::get('sign-in', [AuthController::class, 'sign_in'])->name('sign-in');
@@ -61,3 +64,45 @@ Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderC
 
 Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
     ->name('ckfinder_browser');
+=======
+
+Route::prefix('account')->group(function(){
+        Route::get('', [AccountController::class, 'index'])
+            ->name('account.index');
+
+        Route::get('create', [AccountController::class, 'create'])
+            ->name('account.create');
+
+        Route::post('store', [AccountController::class, 'store'])
+            ->name('account.store');
+
+        Route::get('edit/{id}', [AccountController::class, 'edit'])
+            ->name('account.edit');
+            
+        Route::put('update/{id}', [AccountController::class, 'update'])
+            ->name('account.update');
+
+        Route::get('delete/{id}', [AccountController::class, 'delete'])
+            ->name('account.delete');
+
+    });
+Route::prefix('employee')->group(function(){
+        Route::get('', [AccountController::class, 'index'])
+            ->name('employee.index');
+
+        Route::get('create', [AccountController::class, 'create'])
+            ->name('employee.create');
+
+        Route::post('store', [AccountController::class, 'store'])
+            ->name('employee.store');
+
+        Route::get('edit/{id}', [AccountController::class, 'edit'])
+            ->name('employee.edit');
+            
+        Route::put('update/{id}', [AccountController::class, 'update'])
+            ->name('employee.update');
+
+        Route::get('delete/{id}', [AccountController::class, 'delete'])
+            ->name('employee.delete');
+    });
+>>>>>>> ton
