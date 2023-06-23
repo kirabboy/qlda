@@ -1,4 +1,4 @@
-{{-- <html lang="en">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -16,10 +16,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
-</head> --}}
-@extends('layout')
-@section('content')
-  
+</head>
+
 <body class=" d-flex flex-column">
     <script src="{{ asset('dist/js/demo-theme.min.js?1674944402') }}"></script>
     <div class="page page-center">
@@ -37,6 +35,8 @@
                             </ul>
                         </div>
                     @endif
+
+
                     <form action="{{ route('register') }}" id="validate_form_login" method="POST">
                         @csrf
                         <div class="row">
@@ -78,7 +78,7 @@
                           <div class="col-xl-6">
                                 <div class="mb-3">
                                     <label class="form-label">Birthday</label>
-                                    <input type="text" name="birthday" class="form-control" placeholder="Birthday">
+                                    <input type="text" name="birthday" class="form-control" placeholder="Phone">
                                 </div>
                           </div>
                         </div>
@@ -95,34 +95,15 @@
                           <div class="col-xl-6">
                                 <div class="mb-3">
                                     <label class="form-label">Gender</label>
-                                    <!-- <input type="text" name="gender" class="form-control" placeholder="Your Gender"> -->
-                                    <select class="form-control" name="gender">
-                                        <option value="">Select gender</option>
-                                        <option value="0">Male</option>
-                                        <option value="1">Female</option>
-                                    </select>
+                                    <input type="text" name="gender" class="form-control" placeholder="Your Gender">
                                 </div>
                           </div>
-                          <div class="col-xl-12">
-                            <div class="mb-3">
-                                <label class="form-label">Role</label>
-                                <!-- <input type="text" name="gender" class="form-control" placeholder="Your Gender"> -->
-                                <select class="form-control" name="roles">
-                                    <option value="">Select role</option>
-                                    <option value="1">Employee</option>
-                                    <option value="2">Admin Project</option>
-                                    <option value="3">Supper Admin</option>
-                                </select>
-                            </div>
-                      </div>
                         </div>
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary w-100">Register</button>
                         </div>
+
                     </form>
-                    <div class="text-center text-muted mt-3">
-                        Already have account? <a href="{{route('signin')}}" tabindex="-1">Sign in</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -130,6 +111,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 
-@stop
-{{-- 
-</html> --}}
+</html>
