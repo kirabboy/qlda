@@ -7,9 +7,13 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\EmployeeController;
 
+=======
+use App\Http\Controllers\AdminController;
+>>>>>>> dung
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +25,7 @@ use App\Http\Controllers\EmployeeController;
 |
 */
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Route::get('/', function () {
     return view('index');
@@ -106,3 +111,14 @@ Route::prefix('employee')->group(function(){
             ->name('employee.delete');
     });
 >>>>>>> ton
+=======
+Route::get('/', [AdminController::class, 'index'])->name('home');
+
+Route::get('signin', [AdminController::class, 'signinform'])->name('signin');
+Route::post('/signin', [AdminController::class, 'signin'])->name('signin');
+
+Route::get('register', [AdminController::class, 'registerform'])->name('register');
+Route::post('register', [AdminController::class, 'register'])->name('register');
+
+Route::get('forgotpw', [AdminController::class, 'forgotpw'])->name('forgotpw');
+>>>>>>> dung
