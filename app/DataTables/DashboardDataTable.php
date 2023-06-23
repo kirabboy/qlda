@@ -14,9 +14,15 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\App;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class DashboardDataTable extends DataTable
 {
+    public $projectStatus;
+    public function __construct()
+    {
+        $this->projectStatus = Projectstatus::getKeys();
+    }
     /**
      * Build DataTable class.
      *
@@ -24,15 +30,15 @@ class DashboardDataTable extends DataTable
      * @return \Yajra\DataTables\EloquentDataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
-    {
+    {   
         return (new EloquentDataTable($query))
-            ->editColumn('status', function (Projects $projects) {
-                if ($projects->status->key == Projectstatus::getKey(0)) {
-                    $status = '<span class="badge bg-green-lt">' . __(Projectstatus::getKey(0)) .'</span>';
-                } else if ($projects->status->key ==  Projectstatus::getKey(2)) {
-                    $status = '<span class="badge bg-yellow-lt">' .  __(Projectstatus::getKey(2)) .'</span>';
+            ->editColumn('status', function ($projects) {
+                if ($projects->status->key == $this->projectStatus[0]) {
+                    $status = '<span class="badge bg-green-lt">' . __($this->projectStatus[0]) .'</span>';
+                } else if ($projects->status->key ==  $this->projectStatus[2]) {
+                    $status = '<span class="badge bg-yellow-lt">' .  __($this->projectStatus[2]) .'</span>';
                 } else {
-                    $status = '<span class="badge bg-red-lt">' .  __(Projectstatus::getKey(1)) .'</span>';
+                    $status = '<span class="badge bg-red-lt">' .  __($this->projectStatus[1]) .'</span>';
                 }
                 return $status;
             })
@@ -64,13 +70,6 @@ class DashboardDataTable extends DataTable
      *
      * @return \Yajra\DataTables\Html\Builder
      */
-    // public function getUrl() {
-    //     $locale = App::currentLocale();
-    //     if($locale == 'vi'){
-    //         $url = url('libs/js/language.json');
-    //     }
-    //     return $url;
-    // }
     public function html(): HtmlBuilder
     {    
         $locale = App::currentLocale();

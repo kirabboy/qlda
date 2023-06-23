@@ -4,7 +4,6 @@ namespace App\DataTables;
 
 use App\Enums\ProjectReportStatus;
 use App\Models\Project_report;
-use App\Models\Projects;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -17,6 +16,11 @@ use Illuminate\Support\Facades\App;
 
 class ProjectReportDataTable extends DataTable
 {
+    public $projectReportStatus;
+    public function __construct()
+    {
+        $this->projectReportStatus = ProjectReportStatus::getKeys();
+    }
     /**
      * Build DataTable class.
      *
@@ -26,13 +30,13 @@ class ProjectReportDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->editColumn('status', function (Project_report $project_report) {
-                if ($project_report->status->key == ProjectReportStatus::getKey(0)) {
-                    $status = '<span class="badge bg-green-lt">' . __(ProjectReportStatus::getKey(0)) . '</span>';
-                } else if ($project_report->status->key ==  ProjectReportStatus::getKey(2)) {
-                    $status = '<span class="badge bg-yellow-lt">' . __(ProjectReportStatus::getKey(2)) . '</span>';
+            ->editColumn('status', function ($project_report) {
+                if ($project_report->status->key == $this->projectReportStatus[0]) {
+                    $status = '<span class="badge bg-green-lt">' . __($this->projectReportStatus[0]) . '</span>';
+                } else if ($project_report->status->key ==  $this->projectReportStatus[2]) {
+                    $status = '<span class="badge bg-yellow-lt">' . __($this->projectReportStatus[2]) . '</span>';
                 } else {
-                    $status = '<span class="badge bg-red-lt">' . __(ProjectReportStatus::getKey(1)) . '</span>';
+                    $status = '<span class="badge bg-red-lt">' . __($this->projectReportStatus[1]) . '</span>';
                 }
                 return $status;
             })

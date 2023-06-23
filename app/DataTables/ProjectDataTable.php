@@ -16,23 +16,27 @@ use Illuminate\Support\Facades\App;
 
 class ProjectDataTable extends DataTable
 {
+    public $projectStatus;
+    public function __construct()
+    {
+        $this->projectStatus = Projectstatus::getKeys();
+    }
     /**
      * Build DataTable class.
-     *
+     *s
      * @param QueryBuilder $query Results from query() method.
      * @return \Yajra\DataTables\EloquentDataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-
         return (new EloquentDataTable($query))
-            ->editColumn('status', function (Projects $projects) {
-                if ($projects->status->key == Projectstatus::getKey(0)) {
-                    $status = '<span class="badge bg-green-lt">' . __(Projectstatus::getKey(0)) .'</span>';
-                } else if ($projects->status->key ==  Projectstatus::getKey(2)) {
-                    $status = '<span class="badge bg-yellow-lt">' .  __(Projectstatus::getKey(2)) .'</span>';
+            ->editColumn('status', function ($projects) {
+                if ($projects->status->key == $this->projectStatus[0]) {
+                    $status = '<span class="badge bg-green-lt">' . __($this->projectStatus[0]) .'</span>';
+                } else if ($projects->status->key ==  $this->projectStatus[2]) {
+                    $status = '<span class="badge bg-yellow-lt">' .  __($this->projectStatus[2]) .'</span>';
                 } else {
-                    $status = '<span class="badge bg-red-lt">' .  __(Projectstatus::getKey(1)) .'</span>';
+                    $status = '<span class="badge bg-red-lt">' .  __($this->projectStatus[1]) .'</span>';
                 }
                 return $status;
             })
@@ -111,8 +115,8 @@ class ProjectDataTable extends DataTable
             Column::make('date_cre')->title(__('Date created'))->addClass('text-center'),
             Column::make('version')->title(__('Version'))->addClass('text-center'),
             Column::make('status')->title(__('Status'))->addClass('text-center'),
-            Column::make('note')->visible(false)->title(__('Note'))->addClass('text-center'),
-            Column::computed('action')->title(__('Ac'))
+            Column::make('note')->visible(false)->title(__('Note')),
+            Column::computed('action')->title(__('Action'))
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
