@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ProjectReportStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,9 @@ class Project_report extends Model
         'status',
         'file_report'
     ];
-
+    protected $casts = [
+        'status' => ProjectReportStatus::class,
+    ];
     public function library(){
         return $this->hasOne(Library::class, 'project_report_id');
     }
@@ -29,7 +32,7 @@ class Project_report extends Model
     }
 
     public function projects(){
-        return $this->belongsTo(Project::class,'project_id');
+        return $this->belongsTo(Projects::class,'project_id');
     }
 
 

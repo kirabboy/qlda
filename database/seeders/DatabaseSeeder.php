@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Admins;
+use App\Models\Employee;
+use App\Models\Project_report;
+use App\Models\Projects;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +23,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        Employee::factory()->count(50)->create();
+        Admins::factory()->count(30)->create();
+        Projects::factory()->count(50)->create();
+        Project_report::factory()->count(30)->create();
     }
 }
