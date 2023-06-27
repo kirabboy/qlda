@@ -64,21 +64,14 @@ class AccountController extends Controller
     {
         $admin = Admins::findOrFail($id);
      
-        if ($request->hasFile('avatar')) {
-            $file = $request->file('avatar');
-            $filename = $file->hashName();
-            $file->move(public_path('images'), $filename);
-            $request->merge(['avatar' => $filename]);
-            $admin->save();
+        if ($request->hasFile('file_upload')) {
+            $file = $request->file('file_upload');
+            $file_name = $file->getClientoriginalName();
+            $file->move(public_path('assets/images'), $file_name);
+            $admin->avatar = $file_name;
+            $request->merge(['avatar' => $file_name]);
         }
-        // dd($admin);  
         $admin->update($request->all());
-
-        // dd($admin);  
-        // dd($file->getError());
-        // dd($admin);  
-        $admin->update($request->all());
-
         return redirect()->route('account.index')->with('success', 'Cập Nhật Thành Công');
     }
 

@@ -19,18 +19,18 @@ class AdminsFactory extends Factory
     public function definition(): array
     {
         return [
-            'username' => $this->faker->username(),
-            'fullname' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->phoneNumber(),
-            'birthday' => $this->faker->date(),
+            'username' => 'admin',
+            'fullname' => 'Supper Admin',
+            'email' => 'admin@gmail.com',
+            'phone' => '0313462346',
+            'birthday' => '2000-01-01',
             'gender' => $this->faker->numberBetween($min = 0, $max = 1), 
-            'avatar' => $this->faker->imageUrl($width = 200, $height = 200),
-            'address' => $this->faker->address(),
+            'avatar' => 'avatar-user.png',
+            'address' => 'Thành phố Hồ Chí Minh',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345'),            
+            'password' => Hash::make('admin'),            
             'remember_token' => Str::random(10),
-            'roles' => $this->faker->numberBetween($min = 1, $max = 3), 
+            'roles' => '3',
         ];
     }
 }

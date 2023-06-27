@@ -8,13 +8,13 @@ use Illuminate\View\Component;
 
 class sidebar extends Component
 {
-    public $role;
+    public $sidebar;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {   
-        $this->role = config('role');
+        $this->sidebar = config('sidebar');
     }
 
     /**

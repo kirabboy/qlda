@@ -2,6 +2,7 @@
 @section('content')
     <x-sidebar />
     <div class="page-wrapper">
+        <x-top-bar/>
         <!-- Page body -->
         <div class="page-body">
             <div class="container-xl">
@@ -11,10 +12,10 @@
                             <div class="card-header">
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"
-                                            style="color: #616f82">Dashboard </a></li>
+                                            style="color: #616f82"> {{__('dashboard')}} </a></li>
                                     <li class="breadcrumb-item"><a href="{{ route('project.report.index') }}"
-                                            style="color: #616f82">Quản lý báo cáo dự án </a></li>
-                                    <li class="breadcrumb-item active">Sửa báo cáo dự án</li>
+                                            style="color: #616f82">{{__('ManageReports')}}</a></li>
+                                    <li class="breadcrumb-item active">{{__('Edit')}}</li>
                                 </ul>
                             </div>
                             <div class="card" style="background: #f1f5f9">
@@ -29,11 +30,11 @@
                                                     <!-- title_report -->
                                                     <div class="col-12">
                                                         <div class="mb-3">
-                                                            <label class="control-label">Tiêu đề báo cáo:</label>
+                                                            <label class="control-label">{{__('Title')}}:</label>
                                                             <input type="text" required="required"
-                                                                data-parsley-required-message="Trường này không được bỏ trống."
+                                                                data-parsley-required-message="{{__('required')}}"
                                                                 class="form-control" name="title_report"
-                                                                placeholder="Tiêu đề báo cáo"
+                                                                placeholder="{{__('Title')}}"
                                                                 value="{{ $project_report->title_report }}" />
                                                         </div>
                                                     </div>
@@ -41,9 +42,9 @@
                                                     <!-- employee_id -->
                                                     <div class="col-6">
                                                         <div class="mb-3">
-                                                            <label class="control-label">Nhân viên:</label>
+                                                            <label class="control-label">{{__('Employee')}}:</label>
                                                             <select required="required" id="employee_report"
-                                                                data-parsley-required-message="Trường này không được bỏ trống."
+                                                                data-parsley-required-message="{{__('required')}}"
                                                                 class="form-select select2-bs5-ajax" name="employee_id">
                                                                 @foreach ($getEmployee as $item)
                                                                     <option value="{{ $item->id }}"
@@ -56,9 +57,9 @@
                                                     <!-- project_id -->
                                                     <div class="col-6">
                                                         <div class="mb-3">
-                                                            <label class="control-label">Dự án:</label>
+                                                            <label class="control-label">{{__('project')}}:</label>
                                                             <select required="required" id="project_report"
-                                                                data-parsley-required-message="Trường này không được bỏ trống."
+                                                                data-parsley-required-message="{{__('required')}}"
                                                                 class="form-select" name="project_id">
                                                                 @foreach ($getProject as $item)
                                                                     <option value="{{ $item->id }}"
@@ -73,7 +74,7 @@
                                                     <!-- note -->
                                                     <div class="col-12">
                                                         <div class="mb-3">
-                                                            <label class="control-label">Ghi chú:</label>
+                                                            <label class="control-label">{{__('Note')}}:</label>
                                                             <textarea class="form-control" name="note" rows="3">{{ $project_report->note }}</textarea>
                                                         </div>
                                                     </div>
@@ -82,7 +83,7 @@
                                                     <!-- desc -->
                                                     <div class="col-12">
                                                         <div class="mb-3">
-                                                            <label class="control-label">Mô tả:</label>
+                                                            <label class="control-label">{{__('Description')}}:</label>
                                                             <textarea name="description_report" id="ckeditor-content">{{ $project_report->description_report }}</textarea>
                                                         </div>
                                                     </div>
@@ -92,11 +93,11 @@
                                             <div class="col-12 col-md-3">
                                                 <div class="card mb-3">
                                                     <div class="card-header">
-                                                        Đăng
+                                                        {{__('Post')}}
                                                     </div>
                                                     <div class="card-body p-2">
                                                         <button type="submit" class="btn btn-primary" title="Thêm">
-                                                            Cập nhật
+                                                            {{__('update')}}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -104,7 +105,7 @@
                                                 <!-- date_cre-->
                                                 <div class="card mb-3">
                                                     <div class="card-header">
-                                                        Ngày tạo:
+                                                        {{__('Date created')}}:
                                                     </div>
                                                     <div class="card-body p-2 wrap-list-checkbox">
                                                         <input type="date" name="date_cre_report" class="form-control"
@@ -115,7 +116,7 @@
                                                 <!-- status -->
                                                 <div class="card mb-3">
                                                     <div class="card-header">
-                                                        Trạng thái
+                                                        {{__('Status')}}
                                                     </div>
                                                     <div class="card-body p-2">
                                                         <select required="required"
@@ -124,7 +125,7 @@
                                                             @foreach ($status as $status)
                                                                 <option value="{{ $status->value }}"
                                                                     {{ $status->value == $project_report->status->value ? 'selected' : '' }}>
-                                                                    {{ $status->description }}
+                                                                    {{ __($status->key) }}
                                                                 </option>
                                                             @endforeach
 
@@ -134,7 +135,7 @@
                                                 <!-- file upload -->
                                                 <div class="card mb-3">
                                                     <div class="card-header">
-                                                        Tải tập tin
+                                                        {{__('File upload')}}
                                                     </div>
                                                     <div class="card-body p-2">
                                                         <input type="text" class="form-control" id="name_file" disabled
@@ -142,7 +143,7 @@
                                                         <input type="text" class="d-none" name="file_report"
                                                             value="{{ $project_report->file_report }}" id="input_img">
                                                         <button type="button" id="image"
-                                                            class="btn btn-outline-info">Tải tập tin</button>
+                                                            class="btn btn-outline-info">{{__('File upload')}}</button>
                                                     </div>
                                                 </div>
                                             </div>

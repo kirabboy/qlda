@@ -60,7 +60,7 @@
                     <!-- Trường 'avatar' -->
                     <div class="form-group">
                         <label for="avatar">Ảnh đại diện</label>
-                        <input type="file" value="{{$admin->avatar}}" class="form-control-file" id="avatar" name="avatar">
+                        <input type="file" value="{{$admin->avatar}}" class="form-control-file" id="avatar" name="file_upload">
                     </div>
                     
                     <!-- Trường 'address' -->

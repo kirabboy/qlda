@@ -10,7 +10,7 @@ use BenSampo\Enum\Contracts\LocalizedEnum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class ProjectReportStatus extends Enum implements LocalizedEnum
+final class ProjectReportStatus extends Enum
 {
     const approved = 0;
     const rejected = 1;

@@ -58,77 +58,6 @@
                 </table>
             </div>
         </div>
-        {{-- <div class="modal fade" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form method="post" id="sample_form" class="form-horizontal">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLabel">Thêm Tài Khoản</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <span id="form_result"></span>
-                            <div class="form-group">
-                                <label>Tên tài khoản: </label>
-                                <input type="text" name="username" id="name" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label>Họ và tên: </label>
-                                <input type="text" name="fullname" id="name" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label>Email: </label>
-                                <input type="email" name="email" id="email" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label>Số điện thoại: </label>
-                                <input type="text" name="phone" id="name" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label>Ngày sinh:</label>
-                                <input class="form-control" name="birthday" type="date" />
-                            </div>
-                                <div class="form-group">
-                                    <label>Giới tính:</label><br>
-                                    <input name="gender" value="1" type="radio">Female
-                                    <input name="gender" value="0" type="radio">Male
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tải ảnh lên</label><br>
-                                    <input type="file" name="avatar" id="photo" class="form-control-file"
-                                        value="" name="file_upload">
-                                </div>
-                            <div class="form-group">
-                                <label><strong>Địa chỉ: </strong></label>
-                                <input type="text" name="address" id="name" class="form-control" />
-                            </div>
-                            <div class="form-group editpass">
-                                <label>Mật khẩu: </label>
-                                <input type="password" name="password" id="password" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label>Vai trò:</label><br>
-                                <label class="radio-inline">
-                                    <input name="roles" value="1" type="radio">Employee
-                                </label>
-                                <label class="radio-inline">
-                                    <input name="roles" value="2" type="radio">Admin_project
-                                </label>
-                            </div>
-                            <input type="hidden" name="action" id="action" value="Add" />
-                            <input type="hidden" name="hidden_id" id="hidden_id" />
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <input type="submit" name="action_button" id="action_button" value="add"
-                                class="btn btn-info" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div> --}}
     </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -194,7 +123,7 @@
                     name: 'avatar',
                     // hiển thị ảnh
                     render: function(data, type, full, meta) {
-                        var avatarUrl = '{{ asset('images') }}/' + data;
+                        var avatarUrl = '{{ asset('assets/images') }}/' + data;
                         return '<img src="' + avatarUrl + '" width=100" />';
                     }
                 },

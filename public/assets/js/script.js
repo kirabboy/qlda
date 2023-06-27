@@ -41,6 +41,7 @@ $(document).ready(function () {
     $('#validate_form_cr').parsley();
 })
 
+
 //search column
 function searchColumsDataTable(datatable) {
     datatable.api().columns([1, 2, 3]).every(function () {
@@ -53,7 +54,7 @@ function searchColumsDataTable(datatable) {
             input = document.createElement("select");
             createSelectColumnUniqueDatatableAll(input, column);
         }
-        input.setAttribute('placeholder', 'Nhập từ khoá...');
+        input.setAttribute('placeholder', placeholder);
         $(input).appendTo($(column.footer()).empty())
             .on('change', function () {
                 column.search($(this).val(), false, false, true).draw();
@@ -74,12 +75,12 @@ function searchColumsDataTableProjects(datatable) {
         } else if (column.selector.cols == 5) {
             input = document.createElement("select");
             input.setAttribute('class', 'form-select');
-            $(input).append('<option value="">Tất cả</option>');
+            $(input).append('<option value="">--' + all + '--</option>');
             column.data().unique().sort().each(function (d, j) {
                 $(input).append('<option value=' + d + '>' + d + '</option>');
             });
         }
-        input.setAttribute('placeholder', 'Nhập từ khoá...');
+        input.setAttribute('placeholder', placeholder);
         $(input).appendTo($(column.footer()).empty())
             .on('change', function () {
                 column.search($(this).val(), false, false, true).draw();
@@ -97,12 +98,12 @@ function searchColumsDataTableProjectsReport(datatable) {
         } else if (column.selector.cols == 6) {
             input = document.createElement("select");
             input.setAttribute('class', 'form-select');
-            $(input).append('<option value="">Tất cả</option>');
+            $(input).append('<option value="">--' + all + '--</option>');
             column.data().unique().sort().each(function (d, j) {
                 $(input).append('<option value=' + j + '>' + d + '</option>');
             });
         }
-        input.setAttribute('placeholder', 'Enter keywords');
+        input.setAttribute('placeholder', placeholder);
         $(input).appendTo($(column.footer()).empty())
             .on('change', function () {
                 column.search($(this).val(), false, false, true).draw();
@@ -117,7 +118,7 @@ function appentTo() {
 
 function createSelectColumnUniqueDatatableAll(input, column) {
     input.setAttribute('class', 'form-select');
-    $(input).append('<option value="">Tất cả</option>');
+    $(input).append('<option value="">--' + all + '--</option>');
     column.data().unique().sort().each(function (d, j) {
         $(input).append('<option value=' + j + '>' + d + '</option>');
     });
@@ -135,10 +136,10 @@ $(document).on('click', '.open-modal-delete', function () {
 //select2
 $(document).ready(function () {
     $('#project_report').select2({
-        placeholder: 'Chọn dự án...',
+        placeholder: selectProject,
     });
     $('#employee_report').select2({
-        placeholder: 'Chọn nhân viên...',
+        placeholder: selectEmployee,
     });
 })
 
@@ -160,9 +161,7 @@ function toggleColumnsDatatable(columns) {
         if (columns.column(index).visible() === true) {
             checked = 'checked';
         }
-        htmlToggleColumns +=
-            `
-        <label class="dropdown-item"><input class="toggle-vis form-check-input m-0 me-2" ${checked} type="checkbox" data-column="${index}">${value}</label> `;
+        htmlToggleColumns +=`<label class="dropdown-item"><input class="toggle-vis form-check-input m-0 me-2" ${checked} type="checkbox" data-column="${index}">${value}</label>`;
         $(".drop-toggle-columns").html(htmlToggleColumns);
     });
 }
