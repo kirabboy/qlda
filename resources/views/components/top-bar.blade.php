@@ -40,11 +40,10 @@
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">Profile</a>
-                    <a href="#" class="dropdown-item">Đổi mật khẩu</a>
+                    <a href="#" class="dropdown-item">{{__('Profile')}}</a>
+                    <a href="#" class="dropdown-item">{{__('Change password')}}</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalLogout">Đăng
-                        xuất</a>
+                    <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalLogout">{{__('Logout')}}</a>
                 </div>
             </div>
 

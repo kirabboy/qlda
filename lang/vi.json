@@ -68,5 +68,7 @@
     "Select project" : "Chọn dự án...",
     "Add success"  : "Thêm thành công!",
     "Edit success"  : "Cập nhật thành công!",
-    "Delete success"  : "Xoá thành công!"
+    "Delete success"  : "Xoá thành công!",
+    "Profile" : "Hồ sơ",
+    "Change password" : "Đổi mật khẩu"
 }

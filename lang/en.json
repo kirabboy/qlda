@@ -68,8 +68,7 @@
     "Select project" : "Select project...",
     "Add success" : "Add successfully!",
     "Edit success" : "Update successfully!",
-    "Delete success" : "Delete successfully!"
-
-
-
+    "Delete success" : "Delete successfully!",
+    "Profile" : "Profile",
+    "Change password" : "Change password"
 }
