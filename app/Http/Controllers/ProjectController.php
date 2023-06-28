@@ -53,12 +53,8 @@ class ProjectController extends Controller
             }
         }
         $this->model->create($request->all());
-        return redirect()->route('project.index')->with('success', trans('Add success'));
-    }
-    public function detail($id)
-    {
-        $project = $this->model->FindOrFail($id);
-        return view('project.detail', compact('project'));
+        $id = $this->model->max('id');
+        return redirect()->route('project.edit', $id)->with('success', trans('Add success'));
     }
     public function edit($id)
     {
@@ -86,7 +82,7 @@ class ProjectController extends Controller
             }
         }
         $project->update($request->all());
-        return redirect()->route('project.edit', $id)->with('success', trans('Edit success'));
+        return back()->with('success', trans('Edit success'));
     }
     public function destroy($id)
     {

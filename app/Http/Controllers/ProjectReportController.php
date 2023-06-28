@@ -47,7 +47,8 @@ class ProjectReportController extends Controller
             }
         }
         $this->project_report->create($request->all());
-        return redirect()->route('project.report.index')->with('success', trans('Add success'));
+        $id = $this->project_report->max('id');
+        return redirect()->route('project.report.edit', $id)->with('success', trans('Add success'));
     }
     public function edit($id)
     {
@@ -73,7 +74,7 @@ class ProjectReportController extends Controller
             }
         }
         $project_report->update($request->all());
-        return redirect()->route('project.report.edit', $id)->with('success', trans('Edit success'));
+        return back()->with('success', trans('Edit success'));
     }
     public function destroy($id)
     {

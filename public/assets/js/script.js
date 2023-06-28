@@ -1,7 +1,9 @@
 //ckeditor
-var img = document.getElementById('image');
 $(document).on('click', '#image', function () {
     selectFileWithCKFinder('input_img');
+})
+$(document).on('click', '#profile', function () {
+    selectFileWithCKFinderProfile('input_profile');
 })
 function selectFileWithCKFinder(elementId) {
     CKFinder.popup({
@@ -35,7 +37,28 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
+//ckfinder with profile
+function selectFileWithCKFinderProfile(elementId) {
+    CKFinder.popup({
+        chooseFiles: true,
+        width: 800,
+        height: 600,
+        onInit: function (finder) {
+            finder.on('files:choose', function (evt) {
+                var file = evt.data.files.first();
+                var output = document.getElementById(elementId);
+                var img = document.getElementById('file_upload_profile');
+                output.value = file.getUrl();
+                img.src = file.getUrl();
+            });
 
+            finder.on('file:choose:resizedImage', function (evt) {
+                var output = document.getElementById(elementId);
+                output.value = evt.data.resizedUrl;
+            });
+        }
+    });
+}
 
 $(document).ready(function () {
     $('#validate_form_cr').parsley();

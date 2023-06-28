@@ -111,10 +111,27 @@
         @endif
     </script>
     <script>
+        function showPassword(params) {
+            var x = document.getElementById("oldPasswordInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+    <script>
         var all = "@lang('All')";
         var placeholder = "@lang('placeholder')";
         var selectEmployee = "@lang('Select employee')";
         var selectProject = "@lang('Select project')";
+        var pie_gradient = "@lang('pie_gradient')";
+        var column_basic = "@lang('column_basic')";
+        var approved = "@lang('approved')";
+        var rejected = "@lang('rejected')";
+        var submitted = "@lang('submitted')";
+        var project = "@lang('project')";
+        
     </script>
 
     <!-- Ckeditor & Ckfinder-->

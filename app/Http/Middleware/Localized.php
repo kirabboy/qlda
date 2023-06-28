@@ -22,7 +22,7 @@ class Localized
             App::setLocale(Session::get('locale'));
         }
         else{
-            Session::put("locale", "vi");
+            Session::put("locale", "en");
             App::setLocale(Session::get('locale'));
         }
         return $next($request);

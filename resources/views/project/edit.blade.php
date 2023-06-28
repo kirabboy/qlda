@@ -172,6 +172,10 @@
                                                         <button type="submit" class="btn btn-primary" title="Cập nhật">
                                                             {{ __('update') }}
                                                         </button>
+                                                        <button type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#modalDelete"
+                                                            class="btn btn-danger open-modal-delete float-end"
+                                                            data-route="{{ route('project.destroy', $project->id) }}">{{ __('Delete') }}</button>
                                                     </div>
                                                 </div>
 
@@ -300,4 +304,5 @@
             </div>
         </div>
     </div>
+    <x-destroy/>
 @endsection

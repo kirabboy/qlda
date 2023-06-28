@@ -59,10 +59,4 @@
     var data = {!! json_encode($data, JSON_HEX_TAG) !!};
     var months = {!! json_encode($months, JSON_HEX_TAG) !!};
     var count_month = {!! json_encode($count_month, JSON_HEX_TAG) !!};
-    var approved = "@lang('approved')";
-    var rejected = "@lang('rejected')";
-    var submitted = "@lang('submitted')";
-    var pie_gradient = "@lang('pie_gradient')";
-    var column_basic = "@lang('column_basic')";
-    var project = "@lang('project')";
 </script>

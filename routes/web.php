@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocalizedController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
 use Illuminate\Support\Facades\Route;
@@ -47,20 +48,33 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('project/destroy/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
         Route::get('project/add-employee', [ProjectController::class, 'loadEmployee'])->name('load.employee');
     });
-
+    
+    /* Account */
     Route::get('account', [AccountController::class, 'index'])->name('account.index');
     Route::get('account/create', [AccountController::class, 'create'])->name('account.create');
     Route::post('account/store', [AccountController::class, 'store'])->name('account.store');
     Route::get('account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
     Route::put('update/{id}', [AccountController::class, 'update'])->name('account.update');
     Route::get('delete/{id}', [AccountController::class, 'delete'])->name('account.delete');
+
+     /* Profile */
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('update-profile/{id}', [ProfileController::class, 'updateProfile'])->name('update.profile');
+    Route::get('change-password', [ProfileController::class, 'change_password'])->name('change.password');
+    Route::put('updatePassword', [ProfileController::class, 'updatePassword'])->name('update.password');
 });
 
 Route::middleware(['guest'])->group(function () {
     Route::get('sign-in', [AuthController::class, 'sign_in'])->name('sign-in');
     Route::post('sign-in', [AuthController::class, 'sign_in_action'])->name('sign-in.action');
+    
     Route::get('sign-up', [AuthController::class, 'sign_up'])->name('sign-up');
     Route::post('sign-up/store', [AuthController::class, 'sign_up_action'])->name('sign-up.action');
+
+    Route::get('forgotpassword', [AuthController::class, 'forgot_password'])->name('forgot.password');
+    Route::post('postforgotpassword', [AuthController::class, 'send_gmail'])->name('post.forgot.password');
+    Route::get('get-password/{user}', [AuthController::class, 'get_password'])->name('get.password');
+    Route::post('get-password/{user}', [AuthController::class, 'post_get_password'])->name('get.password');
 });
 
 

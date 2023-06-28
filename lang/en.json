@@ -70,5 +70,21 @@
     "Edit success" : "Update successfully!",
     "Delete success" : "Delete successfully!",
     "Profile" : "Profile",
-    "Change password" : "Change password"
+    "Change password" : "Change password",
+    "male" : "Male",
+    "female" : "Female",
+    "Old Password" : "Old Password",
+    "New Password" : "New Password",
+    "Confirm New Password" : "Confirm New Password",
+    "This value should be the same" : "This value should be the same",
+    "Old Password Doesn't match!" : "Old Password Doesn't match!",
+    "Password changed successfully!" : "Password changed successfully!",
+    "User updated successfully!" : "User updated successfully!",
+    "Full name" : "Full name",
+    "User name" : "User name",
+    "Email" : "Email",
+    "Phone" : "Phone",
+    "Birthday" : "Birthday",
+    "Gender" : "Gender",
+    "Address" : "Address"
 }

@@ -30,7 +30,7 @@
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                     aria-label="Open user menu">
                     <span class="avatar avatar-sm"
-                        style="background-image: url({{ asset('assets/images/avatar-user.png') }})"></span>
+                        style="background-image: url({{ asset('file-upload/images/' . auth()->user()->avatar) }})"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div>{{ auth()->user()->fullname }}</div>
                         <div class="mt-1 small text-muted">
@@ -40,10 +40,11 @@
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">{{__('Profile')}}</a>
-                    <a href="#" class="dropdown-item">{{__('Change password')}}</a>
+                    <a href="{{ route('profile.index') }}" class="dropdown-item">{{ __('Profile') }}</a>
+                    <a href="{{ route('change.password') }}" class="dropdown-item">{{ __('Change password') }}</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalLogout">{{__('Logout')}}</a>
+                    <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                        data-bs-target="#modalLogout">{{ __('Logout') }}</a>
                 </div>
             </div>
 

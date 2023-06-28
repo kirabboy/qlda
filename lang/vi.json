@@ -70,5 +70,21 @@
     "Edit success"  : "Cập nhật thành công!",
     "Delete success"  : "Xoá thành công!",
     "Profile" : "Hồ sơ",
-    "Change password" : "Đổi mật khẩu"
+    "Change password" : "Đổi mật khẩu",
+    "male" : "Nam",
+    "female" : "Nữ",
+    "Old Password" : "Mật khẩu cũ",
+    "New Password" : "Mật khẩu mới",
+    "Confirm New Password" : "Xác nhận mật khẩu",
+    "This value should be the same" : "Mật khẩu không trùng khớp.",
+    "Old Password Doesn't match!" : "Mật khẩu cũ không đúng!",
+    "Password changed successfully!" : "Cập nhật mật khẩu mới thành công!",
+    "User updated successfully!" : "Cập nhật hồ sơ thành công!",
+    "Full name" : "Họ và tên",
+    "User name" : "Tên người dùng",
+    "Email" : "Email",
+    "Phone" : "Số điện thoại",
+    "Birthday" : "Ngày sinh",
+    "Gender" : "Giới tính",
+    "Address" : "Địa chỉ"
 }
