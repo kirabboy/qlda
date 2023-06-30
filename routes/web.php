@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountController_ton;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocalizedController;
@@ -48,16 +49,17 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('project/destroy/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
         Route::get('project/add-employee', [ProjectController::class, 'loadEmployee'])->name('load.employee');
     });
-    
-    /* Account */
-    Route::get('account', [AccountController::class, 'index'])->name('account.index');
-    Route::get('account/create', [AccountController::class, 'create'])->name('account.create');
-    Route::post('account/store', [AccountController::class, 'store'])->name('account.store');
-    Route::get('account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
-    Route::put('update/{id}', [AccountController::class, 'update'])->name('account.update');
-    Route::get('delete/{id}', [AccountController::class, 'delete'])->name('account.delete');
 
-     /* Profile */
+    Route::middleware(['supper_admin'])->group(function () {
+        /* Account */
+        Route::get('account', [AccountController::class, 'index'])->name('account.index');
+        Route::get('account/detail/{id}', [AccountController::class, 'detail'])->name('account.detail');
+        Route::put('account/update/{id}', [AccountController::class, 'update'])->name('account.update');
+        Route::get('account/add', [AccountController::class, 'add'])->name('account.add');
+        Route::post('account/store', [AccountController::class, 'store'])->name('account.store');
+        Route::delete('account/destroy/{id}', [AccountController::class, 'destroy'])->name('account.destroy');
+    });
+    /* Profile */
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('update-profile/{id}', [ProfileController::class, 'updateProfile'])->name('update.profile');
     Route::get('change-password', [ProfileController::class, 'change_password'])->name('change.password');
@@ -67,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['guest'])->group(function () {
     Route::get('sign-in', [AuthController::class, 'sign_in'])->name('sign-in');
     Route::post('sign-in', [AuthController::class, 'sign_in_action'])->name('sign-in.action');
-    
+
     Route::get('sign-up', [AuthController::class, 'sign_up'])->name('sign-up');
     Route::post('sign-up/store', [AuthController::class, 'sign_up_action'])->name('sign-up.action');
 
@@ -76,7 +78,6 @@ Route::middleware(['guest'])->group(function () {
     Route::get('get-password/{user}', [AuthController::class, 'get_password'])->name('get.password');
     Route::post('get-password/{user}', [AuthController::class, 'post_get_password'])->name('get.password');
 });
-
 
 
 /* Ckfinder */

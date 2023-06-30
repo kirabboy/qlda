@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\AdminRole;
+use App\Enums\Gender;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -24,13 +26,13 @@ class AdminsFactory extends Factory
             'email' => 'admin@gmail.com',
             'phone' => '0313462346',
             'birthday' => '2000-01-01',
-            'gender' => $this->faker->numberBetween($min = 0, $max = 1), 
+            'gender' => Gender::male,
             'avatar' => 'avatar-user.png',
             'address' => 'Thành phố Hồ Chí Minh',
             'email_verified_at' => now(),
-            'password' => Hash::make('admin'),            
+            'password' => Hash::make('admin'),
             'remember_token' => Str::random(10),
-            'roles' => '3',
+            'roles' => AdminRole::supper_admin,
         ];
     }
 }

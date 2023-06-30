@@ -3,7 +3,10 @@ $(document).on('click', '#image', function () {
     selectFileWithCKFinder('input_img');
 })
 $(document).on('click', '#profile', function () {
-    selectFileWithCKFinderProfile('input_profile');
+    selectFileWithCKFinderProfile('input_profile', 'file_upload_profile');
+})
+$(document).on('click', '#avatar', function () {
+    selectFileWithCKFinderProfile('input_avatar_account', 'avatar');
 })
 function selectFileWithCKFinder(elementId) {
     CKFinder.popup({
@@ -26,8 +29,6 @@ function selectFileWithCKFinder(elementId) {
         }
     });
 }
-
-
 function escapeHtml(unsafe) {
     return unsafe
         .replace(/&/g, "&amp;")
@@ -38,7 +39,7 @@ function escapeHtml(unsafe) {
 }
 
 //ckfinder with profile
-function selectFileWithCKFinderProfile(elementId) {
+function selectFileWithCKFinderProfile(elementId, imgId) {
     CKFinder.popup({
         chooseFiles: true,
         width: 800,
@@ -47,7 +48,7 @@ function selectFileWithCKFinderProfile(elementId) {
             finder.on('files:choose', function (evt) {
                 var file = evt.data.files.first();
                 var output = document.getElementById(elementId);
-                var img = document.getElementById('file_upload_profile');
+                var img = document.getElementById(imgId);
                 output.value = file.getUrl();
                 img.src = file.getUrl();
             });
@@ -120,9 +121,36 @@ function searchColumsDataTableProjectsReport(datatable) {
             input.setAttribute('type', 'date');
         } else if (column.selector.cols == 6) {
             input = document.createElement("select");
+            createSelectColumnUniqueDatatableAll(input, column)
+        }
+        input.setAttribute('placeholder', placeholder);
+        $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+                column.search($(this).val(), false, false, true).draw();
+            });
+    });
+}
+function searchColumsDataTableAdmins(datatable) {
+    datatable.api().columns([1, 2, 3, 4, 5, 6, 7, 9]).every(function () {
+        var column = this;
+        var input = document.createElement("input");
+        input.setAttribute('class', 'form-control');
+        if (column.selector.cols == 9) {
+            input = document.createElement("select");
             input.setAttribute('class', 'form-select');
             $(input).append('<option value="">--' + all + '--</option>');
             column.data().unique().sort().each(function (d, j) {
+                j+=1;
+                $(input).append('<option value=' + j + '>' + d + '</option>');
+            });
+        }
+        else if (column.selector.cols == 5) {
+            input.setAttribute('type', 'date');
+        } else if (column.selector.cols == 6) {
+            input = document.createElement("select");
+            input.setAttribute('class', 'form-select');
+            $(input).append('<option value="">--' + all + '--</option>');
+            column.data().unique().each(function (d, j) {
                 $(input).append('<option value=' + j + '>' + d + '</option>');
             });
         }
@@ -137,6 +165,7 @@ function searchColumsDataTableProjectsReport(datatable) {
 function appentTo() {
     $('#projects-table tfoot tr').appendTo('#projects-table thead');
     $('#projectreport-table tfoot tr').appendTo('#projectreport-table thead');
+    $('#admins-table tfoot tr').appendTo('#admins-table thead');
 }
 
 function createSelectColumnUniqueDatatableAll(input, column) {
@@ -146,8 +175,6 @@ function createSelectColumnUniqueDatatableAll(input, column) {
         $(input).append('<option value=' + j + '>' + d + '</option>');
     });
 }
-
-
 
 //destroy
 $(document).on('click', '.open-modal-delete', function () {
@@ -175,6 +202,10 @@ $(document).ready(function () {
     columns = window.LaravelDataTables["projectreport-table"].columns();
     toggleColumnsDatatable(columns);
 });
+$(document).ready(function () {
+    columns = window.LaravelDataTables["admins-table"].columns();
+    toggleColumnsDatatable(columns);
+});
 function toggleColumnsDatatable(columns) {
     var headerColumns = columns.header().map(d => d.textContent).toArray(),
         htmlToggleColumns = '',
@@ -184,7 +215,7 @@ function toggleColumnsDatatable(columns) {
         if (columns.column(index).visible() === true) {
             checked = 'checked';
         }
-        htmlToggleColumns +=`<label class="dropdown-item"><input class="toggle-vis form-check-input m-0 me-2" ${checked} type="checkbox" data-column="${index}">${value}</label>`;
+        htmlToggleColumns += `<label class="dropdown-item"><input class="toggle-vis form-check-input m-0 me-2" ${checked} type="checkbox" data-column="${index}">${value}</label>`;
         $(".drop-toggle-columns").html(htmlToggleColumns);
     });
 }

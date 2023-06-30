@@ -23,19 +23,22 @@ class ProfileController extends Controller
     }
     public function updateProfile(Request $request, $id)
     {
+
         $user = $this->admin->FindOrFail($id);
         if ($request->has('avatar')) {
             $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz', 'cgm', 'djv', 'djvu', 'ico', 'ief', 'jpe', 'pbm', 'pgm', 'pnm', 'ppm', 'ras', 'rgb', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'];
             $explodeImage = explode('.', $request->avatar);
             $extension = end($explodeImage);
             if (in_array($extension, $imageExtensions)) {
-                $file = str_replace('http://localhost/appqlda/file-upload/images/', '', $request->avatar);
+                $file = str_replace('http://localhost/qlda/file-upload/images/', '', $request->avatar);
                 $request->merge(['avatar' => $file]);
             } else {
-                $file = str_replace('http://localhost/appqlda/file-upload/files/', '', $request->avatar);
+                $file = str_replace('http://localhost/qlda/file-upload/files/', '', $request->avatar);
                 $request->merge(['avatar' => $file]);
             }
         }
+        $birthday = $request->year . '-' . $request->month . '-' . $request->day;
+        $request->merge(['birthday' => $birthday]);
         $user->update($request->all());
         return redirect()->route('profile.index', $id)->with('success', @trans('User updated successfully!'));
     }

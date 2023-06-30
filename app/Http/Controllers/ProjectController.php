@@ -45,10 +45,10 @@ class ProjectController extends Controller
             $explodeImage = explode('.', $request->file_upload);
             $extension = end($explodeImage);
             if (in_array($extension, $imageExtensions)) {
-                $file = str_replace('http://localhost/appqlda/file-upload/images/', '', $request->file_upload);
+                $file = str_replace('http://localhost/qlda/file-upload/images/', '', $request->file_upload);
                 $request->merge(['file_upload' => $file]);
             } else {
-                $file = str_replace('http://localhost/appqlda/file-upload/files/', '', $request->file_upload);
+                $file = str_replace('http://localhost/qlda/file-upload/files/', '', $request->file_upload);
                 $request->merge(['file_upload' => $file]);
             }
         }
@@ -74,10 +74,10 @@ class ProjectController extends Controller
             $explodeImage = explode('.', $request->file_upload);
             $extension = end($explodeImage);
             if (in_array($extension, $imageExtensions)) {
-                $file = str_replace('http://localhost/appqlda/file-upload/images/', '', $request->file_upload);
+                $file = str_replace('http://localhost/qlda/file-upload/images/', '', $request->file_upload);
                 $request->merge(['file_upload' => $file]);
             } else {
-                $file = str_replace('http://localhost/appqlda/file-upload/files/', '', $request->file_upload);
+                $file = str_replace('http://localhost/qlda/file-upload/files/', '', $request->file_upload);
                 $request->merge(['file_upload' => $file]);
             }
         }

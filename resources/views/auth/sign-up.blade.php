@@ -6,8 +6,7 @@
         <div class="page page-center">
             <div class="container pt-5">
                 <div class="text-center mb-4">
-                    <a href="." class="navbar-brand navbar-brand-autodark"><img
-                            src="{{ asset('dist/img/logomevivumoi.png') }}" height="36" alt=""></a>
+                    <x-logo/>
                 </div>
                 <div class="card card-md">
                     <div class="card-body">
@@ -19,15 +18,17 @@
                                 <div class="col-xl-6">
                                     <div class="mb-3">
                                         <label class="form-control-label">{{ __('Full Name') }}</label>
-                                        <input type="text" name="fullname" class="form-control" placeholder="{{ __('Full Name') }}"
-                                            required="required" data-parsley-required-message="{{ __('required') }}">
+                                        <input type="text" name="fullname" class="form-control"
+                                            placeholder="{{ __('Full Name') }}" required="required"
+                                            data-parsley-required-message="{{ __('required') }}">
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="mb-3">
                                         <label class="form-control-label">{{ __('User Name') }}</label>
-                                        <input type="text" name="username" class="form-control" placeholder="{{ __('User Name') }}"
-                                            required="required" data-parsley-required-message="{{ __('required') }}">
+                                        <input type="text" name="username" class="form-control"
+                                            placeholder="{{ __('User Name') }}" required="required"
+                                            data-parsley-required-message="{{ __('required') }}">
                                     </div>
                                 </div>
                             </div>
@@ -35,17 +36,18 @@
                                 <div class="col-xl-6">
                                     <div class="mb-3">
                                         <label class="form-control-label">{{ __('Email') }}</label>
-                                        <input type="text" name="email" class="form-control" placeholder="{{ __('Email') }}"
-                                            required="required" data-parsley-required-message="{{ __('required') }}"
-                                            data-parsley-type="email"
+                                        <input type="text" name="email" class="form-control"
+                                            placeholder="{{ __('Email') }}" required="required"
+                                            data-parsley-required-message="{{ __('required') }}" data-parsley-type="email"
                                             data-parsley-type-message="{{ __('Invalid email') }}">
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="mb-3">
                                         <label class="form-control-label">{{ __('Phone') }}</label>
-                                        <input type="text" name="phone" class="form-control" placeholder="{{ __('Phone') }}"
-                                            required="required" data-parsley-required-message="{{ __('required') }}"
+                                        <input type="text" name="phone" class="form-control"
+                                            placeholder="{{ __('Phone') }}" required="required"
+                                            data-parsley-required-message="{{ __('required') }}"
                                             data-parsley-length="[10, 10]"
                                             data-parsley-length-message="{{ __('Phone validate') }}"
                                             data-parsley-type="digits"
@@ -56,61 +58,103 @@
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="mb-3">
-                                        <label class="form-control-label">{{__('Birthday')}}</label>
-                                        <input type="date" name="birthday" class="form-control" placeholder="{{__('Birthday')}}"
-                                            required data-parsley-required-message="{{ __('required') }}">
+                                        <label class="form-control-label">{{ __('Birthday') }}</label>
+                                        <div class="row g-2">
+                                            <div class="col-3">
+                                                <select name="day" class="form-select" required
+                                                    data-parsley-required-message="{{ __('required') }}">
+                                                    <option value="">{{ __('Day') }}
+                                                    </option>
+                                                    @for ($i = 1; $i <= 31; $i++)
+                                                        <option value="{{ $i }}">
+                                                            {{ $i }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                                <select name="month" class="form-select" required
+                                                    data-parsley-required-message="{{ __('required') }}">
+                                                    <option value="">{{ __('Month') }}</option>
+                                                    <option value="1">01 - January</option>
+                                                    <option value="2">02 - February</option>
+                                                    <option value="3">03 - March</option>
+                                                    <option value="4">04 - April</option>
+                                                    <option value="5">05 - May</option>
+                                                    <option value="6">06 - June</option>
+                                                    <option value="7">07 - July</option>
+                                                    <option value="8">08 - August</option>
+                                                    <option value="9">09 - September</option>
+                                                    <option value="10">10 - October</option>
+                                                    <option value="11">11 - November</option>
+                                                    <option value="12">12 - December</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-5">
+                                                <select name="year" class="form-select" required
+                                                    data-parsley-required-message="{{ __('required') }}">
+                                                    <option value="">{{ __('Year') }}</option>
+                                                    @for ($i = 1890; $i <= 2015; $i++)
+                                                        <option value="{{ $i }}">
+                                                            {{ $i }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="mb-3">
-                                        <label class="form-label">{{__('Gender')}}</label>
+                                        <label class="form-label">{{ __('Gender') }}</label>
                                         <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" value="0"
-                                                name="gender" checked>
-                                            <span class="form-check-label">{{__('Male')}}</span>
+                                            <input class="form-check-input" type="radio" value="0" name="gender"
+                                                checked>
+                                            <span class="form-check-label">{{ __('Male') }}</span>
                                         </label>
                                         <label class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" value="1"
                                                 name="gender">
-                                            <span class="form-check-label">{{__('Female')}}</span>
+                                            <span class="form-check-label">{{ __('Female') }}</span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-control-label">{{__('Address')}}</label>
-                                <input type="text" name="address" class="form-control" placeholder="{{__('Address')}}" required
+                                <label class="form-control-label">{{ __('Address') }}</label>
+                                <input type="text" name="address" class="form-control"
+                                    placeholder="{{ __('Address') }}" required
                                     data-parsley-required-message="{{ __('required') }}">
                             </div>
                             <div class="row">
                                 <div class="col-xl-6">
-                                    <div class="mb-2">
-                                        <label class="form-control-label">
-                                            {{__('Password')}}
-                                        </label>
-                                        <input type="password" class="form-control" placeholder="{{__('Password')}}"
-                                            id="password" name="password" required
+                                    <div class="mb-3">
+                                        <label for="newPasswordInput" class="form-control-label">{{ __('New Password') }}</label>
+                                        <input name="password" type="password" class="form-control" id="newPasswordInput"
+                                            placeholder="{{ __('New Password') }}" required
                                             data-parsley-required-message="{{ __('required') }}">
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="mb-3">
-                                        <label class="form-control-label">{{__('Confirm password')}}</label>
-                                        <input type="password" name="confirm_password" class="form-control"
-                                            placeholder="{{__('Confirm password')}}" required
-                                            data-parsley-required-message="{{ __('required') }}">
+                                        <label for="confirmNewPasswordInput"
+                                            class="form-control-label">{{ __('Confirm New Password') }}</label>
+                                        <input name="password_confirmation" type="password" class="form-control"
+                                            id="confirmNewPasswordInput" placeholder="{{ __('Confirm New Password') }}" required
+                                            data-parsley-required-message="{{ __('required') }}"
+                                            data-parsley-equalto="#newPasswordInput"
+                                            data-parsley-equalto-message="{{ __('This value should be the same') }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-footer">
-                                <button type="submit" class="btn btn-primary float-end">{{__('Register')}}</button>
+                                <button type="submit" class="btn btn-primary float-end">{{ __('Register') }}</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="text-center text-muted mt-3">
-                {{__('Do you already have an account ?')}}<a href="{{ route('sign-in') }}" tabindex="-1"> {{__('Sign in')}}</a>
+                {{ __('Do you already have an account ?') }}<a href="{{ route('sign-in') }}" tabindex="-1">
+                    {{ __('Sign in') }}</a>
             </div>
         </div>
     @endsection

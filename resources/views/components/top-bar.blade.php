@@ -34,7 +34,13 @@
                     <div class="d-none d-xl-block ps-2">
                         <div>{{ auth()->user()->fullname }}</div>
                         <div class="mt-1 small text-muted">
-                            <span class="badge bg-teal-lt">{{ __(auth()->user()->roles->key) }}</span>
+                            @if (auth()->user()->roles->value == '1')
+                                <span class="badge bg-green-lt"> {{ __(auth()->user()->roles->key) }}</span>
+                            @elseif (auth()->user()->roles->value == '2')
+                                <span class="badge bg-orange-lt">{{ __(auth()->user()->roles->key) }}</span>
+                            @else
+                                <span class="badge bg-red-lt">{{ __(auth()->user()->roles->key) }}</span>
+                            @endif
                         </div>
                     </div>
 

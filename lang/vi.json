@@ -86,5 +86,16 @@
     "Phone" : "Số điện thoại",
     "Birthday" : "Ngày sinh",
     "Gender" : "Giới tính",
-    "Address" : "Địa chỉ"
+    "Address" : "Địa chỉ",
+    "Day" : "Ngày", 
+    "Month" : "Tháng", 
+    "Year" : "Năm",
+    "Account" : "Tài khoản",
+    "Role" : "Vai trò",
+    "Fullname" : "Họ và tên",
+    "Account detail" : "Chi tiết tài khoản",
+    "Avatar" : "Hình đại diện",
+    "Username is duplicated" : "Tên người dùng hiện đang có người sử dụng!",
+    "Email is duplicated" : "Email hiện đang có người sử dụng!",
+    "Phone is duplicated" : "Số điện thoại hiện đang có người sử dụng!"
 }

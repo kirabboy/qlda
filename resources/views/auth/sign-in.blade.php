@@ -5,8 +5,7 @@
         <div class="page page-center">
             <div class="container container-tight py-4">
                 <div class="text-center mb-4">
-                    <a href="." class="navbar-brand navbar-brand-autodark"><img
-                            src="{{ asset('dist/img/logomevivumoi.png') }}" height="36" alt=""></a>
+                    <x-logo/>
                 </div>
                 <div class="card card-md">
                     <div class="card-body">

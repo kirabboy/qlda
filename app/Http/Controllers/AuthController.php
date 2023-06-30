@@ -23,7 +23,7 @@ class AuthController extends Controller
         return view('auth.sign-up');
     }
     public function sign_up_action(Request $request)
-    {
+    {   
         $request['password'] = Hash::make($request->password);
         $file_name = "avatar-user.png";
         $request->merge(['avatar' => $file_name]);
@@ -40,6 +40,8 @@ class AuthController extends Controller
         if ($user_phone != null) {
             return redirect()->back()->with('error', 'Phone is duplicated');
         }
+        $birthday = $request->year . '-' . $request->month . '-' . $request->day;
+        $request->merge(['birthday' => $birthday]);
         $this->admin->create($request->all());
         return redirect()->route('sign-in')->with('success', 'Register Access');
     }
