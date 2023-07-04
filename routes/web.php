@@ -4,10 +4,15 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountController_ton;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DownloadFileController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\LocalizedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
+use App\Models\Employee;
+use CKSource\CKFinder\Command\DownloadFile;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
@@ -36,7 +41,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('project-report/edit/{id}', [ProjectReportController::class, 'edit'])->name('project.report.edit');
         Route::put('project-report/update/{id}', [ProjectReportController::class, 'update'])->name('project.report.update');
         Route::delete('project-report/destroy/{id}', [ProjectReportController::class, 'destroy'])->name('project.report.destroy');
-        Route::get('project/download/{id}', [ProjectReportController::class, 'downloadFile'])->name('download.file');
+       
+
+        /* File download */
+        Route::get('file-download', [DownloadFileController::class, 'index'])->name('file_download.index');
+        Route::get('file-download/{id}', [LibraryController::class, 'downloadFile'])->name('download.file');
+        Route::delete('file-download/destroy/{id}', [DownloadFileController::class, 'destroy'])->name('file_download.destroy');
     });
 
     Route::middleware(['admin_project'])->group(function () {
@@ -48,6 +58,23 @@ Route::middleware(['auth'])->group(function () {
         Route::put('project/update/{id}', [ProjectController::class, 'update'])->name('project.update');
         Route::delete('project/destroy/{id}', [ProjectController::class, 'destroy'])->name('project.destroy');
         Route::get('project/add-employee', [ProjectController::class, 'loadEmployee'])->name('load.employee');
+
+        /* Library */
+        Route::get('library', [LibraryController::class, 'index'])->name('library.index');
+        Route::put('library-status/{id}' ,[LibraryController::class, 'library_status']);
+        Route::post('file_download/store', [LibraryController::class, 'store_file_download']);
+        Route::delete('library/destroy/{id}' ,[LibraryController::class, 'destroy'])->name('library.destroy');
+        Route::get('library/edit/{id}' ,[LibraryController::class, 'edit'])->name('library.edit');
+        Route::put('library/update/{id}', [LibraryController::class, 'update'])->name('library.update');
+        Route::get('library/download/{id}', [LibraryController::class, 'downloadFile'])->name('download.file');
+
+        /* Employee */
+        Route::get('employee', [EmployeeController::class, 'index'])->name('employee.index');
+        Route::get('employee/add', [EmployeeController::class, 'add'])->name('employee.add');
+        Route::post('employee/store', [EmployeeController::class, 'store'])->name('employee.store');
+        Route::get('employee/edit/{id}', [EmployeeController::class, 'edit'])->name('employee.edit');
+        Route::put('employee/update/{id}', [EmployeeController::class, 'update'])->name('employee.update');
+        Route::delete('employee/destroy/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
     });
 
     Route::middleware(['supper_admin'])->group(function () {
@@ -59,6 +86,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('account/store', [AccountController::class, 'store'])->name('account.store');
         Route::delete('account/destroy/{id}', [AccountController::class, 'destroy'])->name('account.destroy');
     });
+
     /* Profile */
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('update-profile/{id}', [ProfileController::class, 'updateProfile'])->name('update.profile');

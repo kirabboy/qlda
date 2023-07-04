@@ -61,7 +61,7 @@ return [
     ],
     [
         'title' => 'file download',
-        'route' => 'dashboard',
+        'route' => 'file_download.index',
         'icon' => 'fa-sharp fa-solid fa-file-arrow-down',
         'roles' => [
             App\Enums\AdminRole::employee,
@@ -70,28 +70,56 @@ return [
     ],
     [
         'title' => 'library',
-        'route' => 'dashboard',
+        'route' => 'library.index',
         'icon' => 'fa-solid fa-bookmark',
         'roles' => [
             App\Enums\AdminRole::admin_project,
             App\Enums\AdminRole::supper_admin,
-        ]
+        ], 
     ],
     [
         'title' => 'employee',
-        'route' => 'dashboard',
+        'route' => null,
         'icon' => 'fa-solid fa-users',
         'roles' => [
             App\Enums\AdminRole::admin_project,
             App\Enums\AdminRole::supper_admin,
+        ],
+        'sub' => [
+            [
+                'title' => 'add',
+                'route' => 'employee.add',
+                'icon' =>   'fa-light fa-plus',
+                'roles' => [],
+            ],
+            [
+                'title' => 'list',
+                'route' => 'employee.index',
+                'icon' => 'fa-sharp fa-solid fa-list',
+                'roles' => [],
+            ],
         ]
     ],
     [
         'title' => 'account',
-        'route' => 'account.index',
+        'route' => null,
         'icon' => 'fa-regular fa-user',
         'roles' => [
             App\Enums\AdminRole::supper_admin,
+        ],
+        'sub' => [
+            [
+                'title' => 'add',
+                'route' => 'account.add',
+                'icon' =>   'fa-light fa-plus',
+                'roles' => [],
+            ],
+            [
+                'title' => 'list',
+                'route' => 'account.index',
+                'icon' => 'fa-sharp fa-solid fa-list',
+                'roles' => [],
+            ],
         ]
     ],
 ];

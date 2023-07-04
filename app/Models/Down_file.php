@@ -9,14 +9,14 @@ class Down_file extends Model
 {
     use HasFactory;
 
-    protected $table = 'downloade_files';
+    protected $table = 'download_files';
     protected $fillable = [
         'employee_id',
         'library_id',
     ];
 
     public function employee(){
-        return $this->belongsToMany(Employee::class,'employee_id');
+        return $this->belongsTo(Employee::class,'employee_id');
     }
 
     public function library(){

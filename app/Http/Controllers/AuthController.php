@@ -52,12 +52,12 @@ class AuthController extends Controller
     public function sign_in_action(Request $request)
     {
         $request->validate([
-            'username' => "required",
+            'phone' => "required",
             'password' => "required",
         ]);
-        $credentials = $request->only('username', 'email', 'password');
-        $field = filter_var($credentials['username'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if (Auth::attempt([$field => $credentials['username'], 'password' => $credentials['password']])) {
+        $credentials = $request->only('phone', 'email', 'password');
+        $field = filter_var($credentials['phone'], FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+        if (Auth::attempt([$field => $credentials['phone'], 'password' => $credentials['password']])) {
             return redirect()->route('dashboard')->with('success', 'Signed in');
         }
         return redirect("sign-in")->with('error', 'Login details are not valid');

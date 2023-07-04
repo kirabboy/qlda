@@ -18,6 +18,7 @@ class Employee extends Model
         'email',
         'address',
         'birthday',
+        'gender',
         'avatar',
         'department'
     ];
@@ -39,6 +40,6 @@ class Employee extends Model
     }
 
     public function download_file(){
-        return $this->belongsToMany(Down_file::class,'employee_id');
+        return $this->hasMany(Down_file::class,'employee_id');
     }
 }

@@ -28,7 +28,7 @@
                                             <div class="col-12 col-md-9">
                                                 <div class="row">
                                                     <!-- name project-->
-                                                    <div class="col-12">
+                                                    <div class="col-6">
                                                         <div class="mb-3">
                                                             <label class="control-label">{{ __('Name project') }}:</label>
                                                             <input type="text" required="required"
@@ -38,7 +38,22 @@
                                                                 placeholder="{{ __('Name project') }}" />
                                                         </div>
                                                     </div>
-
+                                                    <!-- admin_id -->
+                                                    <div class="col-6">
+                                                        <div class="mb-3">
+                                                            <label class="control-label">{{ __('Admin') }}:</label>
+                                                            <select required="required" id="admin"
+                                                                data-parsley-required-message="{{ __('required') }}"
+                                                                class="form-select" name="admin_id">
+                                                                <option></option>
+                                                                @foreach ($admin as $item)
+                                                                    <option value="{{ $item->id }}"
+                                                                        {{ $item->id == $project->admin_id ? 'selected' : '' }}>
+                                                                        {{ $item->fullname }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
 
                                                     <!-- desc -->
                                                     <div class="col-12">
@@ -252,8 +267,8 @@
                                                             disabled
                                                             value="Selected: {{ str_replace('/file-upload/', '', $project->file_upload) }}">
                                                         <input type="text" class="d-none" name="file_upload"
-                                                            value="{{ $project->file_upload }}" id="input_img">
-                                                        <button type="button" id="image"
+                                                            value="{{ $project->file_upload }}" id="input_img_project">
+                                                        <button type="button" id="file_upload_project"
                                                             class="btn btn-outline-info">{{ __('File upload') }}</button>
                                                     </div>
                                                 </div>
@@ -304,5 +319,5 @@
             </div>
         </div>
     </div>
-    <x-destroy/>
+    <x-destroy />
 @endsection

@@ -15,7 +15,7 @@ use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class ProjectController extends Controller
 {
-    public $model, $status, $status_sample, $status_contract, $status_material, $employee;
+    public $model, $status, $status_sample, $status_contract, $status_material, $employee, $admin;
     public function __construct()
     {
         $this->model = new Projects();
@@ -24,6 +24,7 @@ class ProjectController extends Controller
         $this->status_contract = Projectcontract::getInstances();
         $this->status_material = Projectmaterial::getInstances();
         $this->employee = new Employee();
+        $this->admin = new Admins();
     }
     public function index(ProjectDataTable $datatable)
     {
@@ -35,11 +36,11 @@ class ProjectController extends Controller
         $status_sample = $this->status_sample;
         $status_contract = $this->status_contract;
         $status_material = $this->status_material;
-        return view('project.add', compact('status', 'status_sample', 'status_contract', 'status_material'));
+        $admin = $this->admin->all();
+        return view('project.add', compact('status', 'status_sample', 'status_contract', 'status_material', 'admin'));
     }
     public function store(Request $request)
     {
-        $request->merge(['admin_id' => auth()->user()->id]);
         if ($request->has('file_upload')) {
             $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz', 'cgm', 'djv', 'djvu', 'ico', 'ief', 'jpe', 'pbm', 'pgm', 'pnm', 'ppm', 'ras', 'rgb', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'];
             $explodeImage = explode('.', $request->file_upload);
@@ -62,9 +63,10 @@ class ProjectController extends Controller
         $status_sample = $this->status_sample;
         $status_contract = $this->status_contract;
         $status_material = $this->status_material;
+        $admin = $this->admin->all();
         $project = $this->model->FindOrFail($id);
         $list_employee = $this->employee->where('project_id', $id)->get();
-        return view('project.edit', compact('project', 'status', 'status_sample', 'status_contract', 'status_material', 'list_employee'));
+        return view('project.edit', compact('project', 'status', 'status_sample', 'status_contract', 'status_material', 'list_employee', 'admin'));
     }
     public function update(Request $request, $id)
     {

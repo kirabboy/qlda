@@ -17,7 +17,7 @@ class Library extends Model
         'file_path',
         'file_size',
         'file_type',
-        'birthday'
+        'status'
     ];
 
     protected $casts = [
@@ -25,7 +25,7 @@ class Library extends Model
     ];
 
     public function projects(){
-        return $this->belongsToMany(Projects::class,'project_id');
+        return $this->belongsTo(Projects::class,'project_id');
     }
 
     public function project_report(){

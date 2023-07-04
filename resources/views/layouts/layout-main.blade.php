@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Dashboard</title>
 
     <!-- CSS files -->
@@ -79,8 +80,8 @@
                 "preventDuplicates": false,
                 "onclick": null,
                 "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "3000",
+                "hideDuration": "500",
+                "timeOut": "2000",
                 "extendedTimeOut": "1000",
                 "showEasing": "swing",
                 "hideEasing": "linear",
@@ -100,7 +101,7 @@
                 "onclick": null,
                 "showDuration": "300",
                 "hideDuration": "1000",
-                "timeOut": "3000",
+                "timeOut": "2000",
                 "extendedTimeOut": "1000",
                 "showEasing": "swing",
                 "hideEasing": "linear",
@@ -131,6 +132,15 @@
         var rejected = "@lang('rejected')";
         var submitted = "@lang('submitted')";
         var project = "@lang('project')";
+        var approved = "@lang('approved')";
+        var not_approved = "@lang('not_approved')";
+        var rejected = "@lang('rejected')";
+        var submitted = "@lang('submitted')";
+        var supper_admin = "@lang('supper_admin')";
+        var admin_project = "@lang('admin_project')";
+        var employee = "@lang('employee')";
+        var male = "@lang('male')";
+        var famale = "@lang('female')";
         
     </script>
 

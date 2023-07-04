@@ -64,7 +64,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admins::class,
             'table' => 'admins',
-            'username' => 'username',
+            'username' => 'phone',
         ],
 
         'users-email' => [

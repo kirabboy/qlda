@@ -4,30 +4,27 @@
     <body class=" d-flex flex-column">
         <script src="{{ asset('dist/js/demo-theme.min.js?1674944402') }}"></script>
         <div class="page page-center">
-            <div class="container pt-5">
+            <div class="container px-5">
                 <div class="text-center mb-4">
                     <x-logo/>
                 </div>
                 <div class="card card-md">
                     <div class="card-body">
-                        <h2 class="h2 text-center mb-4">{{ __('Create new account') }}</h2>
                         <form action="{{ route('sign-up.action') }}" method="POST" data-parsley-validate id="validate_form"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="mb-3">
-                                        <label class="form-control-label">{{ __('Full Name') }}</label>
                                         <input type="text" name="fullname" class="form-control"
-                                            placeholder="{{ __('Full Name') }}" required="required"
+                                            placeholder="{{ __('Fullname') }}" required="required"
                                             data-parsley-required-message="{{ __('required') }}">
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="mb-3">
-                                        <label class="form-control-label">{{ __('User Name') }}</label>
                                         <input type="text" name="username" class="form-control"
-                                            placeholder="{{ __('User Name') }}" required="required"
+                                            placeholder="{{ __('User name') }}" required="required"
                                             data-parsley-required-message="{{ __('required') }}">
                                     </div>
                                 </div>
@@ -35,7 +32,6 @@
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="mb-3">
-                                        <label class="form-control-label">{{ __('Email') }}</label>
                                         <input type="text" name="email" class="form-control"
                                             placeholder="{{ __('Email') }}" required="required"
                                             data-parsley-required-message="{{ __('required') }}" data-parsley-type="email"
@@ -44,7 +40,6 @@
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="mb-3">
-                                        <label class="form-control-label">{{ __('Phone') }}</label>
                                         <input type="text" name="phone" class="form-control"
                                             placeholder="{{ __('Phone') }}" required="required"
                                             data-parsley-required-message="{{ __('required') }}"
@@ -108,18 +103,17 @@
                                         <label class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" value="0" name="gender"
                                                 checked>
-                                            <span class="form-check-label">{{ __('Male') }}</span>
+                                            <span class="form-check-label">{{ __('male') }}</span>
                                         </label>
                                         <label class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" value="1"
                                                 name="gender">
-                                            <span class="form-check-label">{{ __('Female') }}</span>
+                                            <span class="form-check-label">{{ __('female') }}</span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-control-label">{{ __('Address') }}</label>
                                 <input type="text" name="address" class="form-control"
                                     placeholder="{{ __('Address') }}" required
                                     data-parsley-required-message="{{ __('required') }}">
@@ -127,7 +121,6 @@
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="mb-3">
-                                        <label for="newPasswordInput" class="form-control-label">{{ __('New Password') }}</label>
                                         <input name="password" type="password" class="form-control" id="newPasswordInput"
                                             placeholder="{{ __('New Password') }}" required
                                             data-parsley-required-message="{{ __('required') }}">
@@ -135,8 +128,6 @@
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="mb-3">
-                                        <label for="confirmNewPasswordInput"
-                                            class="form-control-label">{{ __('Confirm New Password') }}</label>
                                         <input name="password_confirmation" type="password" class="form-control"
                                             id="confirmNewPasswordInput" placeholder="{{ __('Confirm New Password') }}" required
                                             data-parsley-required-message="{{ __('required') }}"
@@ -146,7 +137,7 @@
                                 </div>
                             </div>
                             <div class="form-footer">
-                                <button type="submit" class="btn btn-primary float-end">{{ __('Register') }}</button>
+                                <button type="submit" class="btn btn-primary float-end">{{ __('Sign up') }}</button>
                             </div>
                         </form>
                     </div>
@@ -155,6 +146,11 @@
             <div class="text-center text-muted mt-3">
                 {{ __('Do you already have an account ?') }}<a href="{{ route('sign-in') }}" tabindex="-1">
                     {{ __('Sign in') }}</a>
+            </div>
+            <div class="d-inline">
+                @foreach (config('app.available_locales') as $locale => $language)
+                    <a href="{{ url('locale', $locale) }}">{{ __($language) }}  </a>
+                @endforeach
             </div>
         </div>
     @endsection

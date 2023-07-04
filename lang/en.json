@@ -94,5 +94,6 @@
     "Avatar" : "Avatar",
     "Username is duplicated" : "Username is duplicated",
     "Email is duplicated" : "Email is duplicated",
-    "Phone is duplicated" : "Phone is duplicated"
+    "Phone is duplicated" : "Phone is duplicated",
+    "not_approved" : "Not yet"
 }

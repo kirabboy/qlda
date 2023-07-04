@@ -48,7 +48,7 @@ class Projects extends Model
     }
 
     public function library(){
-        return $this->belongsToMany(Library::class,'project_id');
+        return $this->hasMany(Library::class,'project_id');
     }
 
     public function employee(){
