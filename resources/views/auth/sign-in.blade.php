@@ -20,7 +20,7 @@
                             <div class="mb-3">
                                 <div class="input-group input-group-flat">
                                     <input type="password" class="form-control" name="password" id="password"
-                                        placeholder="{{__('Your password')}}" autocomplete="off">
+                                        placeholder="{{ __('Your password') }}" autocomplete="off">
                                     <span class="input-group-text">
                                         <a href="#" class="link-secondary" title="Show password"
                                             onclick="showPassword()" data-bs-toggle="tooltip">
@@ -43,17 +43,13 @@
                             </div>
                         </form>
                         <div class="card-header"></div>
-                        <div class="card-body text-center">
-                            <a href="{{ route('sign-up') }}" class="btn btn-success"
-                                tabindex="-1">{{ __('Create new account') }}</a>
-                        </div>
                     </div>
 
                 </div>
             </div>
-            <div class="d-inline">
+            <div class="d-inline pt-5">
                 @foreach (config('app.available_locales') as $locale => $language)
-                    <a href="{{ url('locale', $locale) }}">{{ __($language) }}  </a>
+                    <a href="{{ url('locale', $locale) }}">{{ __($language) }} </a>
                 @endforeach
             </div>
         </div>

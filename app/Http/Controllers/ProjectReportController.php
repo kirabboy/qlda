@@ -39,23 +39,18 @@ class ProjectReportController extends Controller
     public function store(Request $request)
     {
         if ($request->has('file_report')) {
-            $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz', 'cgm', 'djv', 'djvu', 'ico', 'ief', 'jpe', 'pbm', 'pgm', 'pnm', 'ppm', 'ras', 'rgb', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'];
-            $explodeImage = explode('.', $request->file_report);
-            $extension = end($explodeImage);
-            if (in_array($extension, $imageExtensions)) {
-                $file = str_replace('http://localhost/qlda/file-upload/images/', '', $request->file_report);
-                $request->merge(['file_report' => $file]);
-            } else {
-                $file = str_replace('http://localhost/qlda/file-upload/files/', '', $request->file_report);
-                $request->merge(['file_report' => $file]);
+            $file = explode('/', $request->file_report);
+            for ($x = 0; $x < count($file); $x++) {
+                $filename = $file[$x];
             }
+            $request->merge(['file_report' => $filename]);
         }
         $this->project_report->create($request->all());
         $id = $this->project_report->max('id');
         $request->merge(['project_report_id' => $id]);
         $request->merge(['status' => $this->status_library[1]]);
         $this->library->create($request->all());
-        return redirect()->route('project.report.edit', $id)->with('success', trans('Add success'));
+        return redirect()->route('project.report.edit', $id)->with('success', __('Add success'));
     }
     public function edit($id)
     {
@@ -69,24 +64,34 @@ class ProjectReportController extends Controller
     {
         $project_report = $this->project_report->FindOrFail($id);
         if ($request->has('file_report')) {
-            $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz', 'cgm', 'djv', 'djvu', 'ico', 'ief', 'jpe', 'pbm', 'pgm', 'pnm', 'ppm', 'ras', 'rgb', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'];
-            $explodeImage = explode('.', $request->file_report);
-            $extension = end($explodeImage);
-            if (in_array($extension, $imageExtensions)) {
-                $file = str_replace('http://localhost/qlda/file-upload/images/', '', $request->file_report);
-                $request->merge(['file_report' => $file]);
-            } else {
-                $file = str_replace('http://localhost/qlda/file-upload/files/', '', $request->file_report);
-                $request->merge(['file_report' => $file]);
+            $file = explode('/', $request->file_report);
+            for ($x = 0; $x < count($file); $x++) {
+                $filename = $file[$x];
             }
+            $request->merge(['file_report' => $filename]);
         }
         $project_report->update($request->all());
-        return back()->with('success', trans('Edit success'));
+
+        //update library
+        $request->merge(['project_report_id' => $id]);
+        $getAllLibrary = $this->library->where('project_report_id', $id)->get();
+        foreach ($getAllLibrary as $value) {
+            $library_id = $value->id;
+            $request->merge(['status' => $value->status->value]);
+            $name_file_upload = $value->filename;
+        }
+        $library = $this->library->FindOrFail($library_id);
+        if ($project_report->file_report == $name_file_upload) {
+            $library->update(['project_id' => $request->project_id]);
+            return back()->with('success', __('Edit success'));
+        }
+        $library->update($request->all());
+        return back()->with('success', __('Edit success'));
     }
     public function destroy($id)
     {
         $project = $this->project_report->FindOrFail($id);
         $project->delete();
-        return redirect()->route('project.report.index')->with('success', trans('Delete success'));
+        return redirect()->route('project.report.index')->with('success', __('Delete success'));
     }
 }

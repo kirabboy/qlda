@@ -18,7 +18,7 @@
                                     <li class="breadcrumb-item active">{{ __('Edit') }}</li>
                                 </ul>
                             </div>
-                            <div class="card" style="background: #f1f5f9">
+                            <div class="card">
                                 <div class="card-body">
                                     <form action="{{ route('project.update', $project->id) }}" method="POST"
                                         enctype="multipart/form-data" data-parsley-validate id="validate_form_cr">
@@ -231,7 +231,7 @@
                                                             @foreach ($status as $status)
                                                                 <option value="{{ $status->value }} "
                                                                     {{ $status->value == $project->status->value ? 'selected' : '' }}>
-                                                                    {{ $status->description }}
+                                                                    {{ __($status->key) }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -250,7 +250,7 @@
                                                             @foreach ($status_sample as $status)
                                                                 <option value="{{ $status->value }} "
                                                                     {{ $status->value == $project->sample_status_MA->value ? 'selected' : '' }}>
-                                                                    {{ $status->description }}
+                                                                    {{ __($status->key) }}
                                                                 </option>
                                                             @endforeach
                                                         </select>

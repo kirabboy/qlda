@@ -23,24 +23,18 @@ class ProfileController extends Controller
     }
     public function updateProfile(Request $request, $id)
     {
-
         $user = $this->admin->FindOrFail($id);
         if ($request->has('avatar')) {
-            $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz', 'cgm', 'djv', 'djvu', 'ico', 'ief', 'jpe', 'pbm', 'pgm', 'pnm', 'ppm', 'ras', 'rgb', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'];
-            $explodeImage = explode('.', $request->avatar);
-            $extension = end($explodeImage);
-            if (in_array($extension, $imageExtensions)) {
-                $file = str_replace('http://localhost/qlda/file-upload/images/', '', $request->avatar);
-                $request->merge(['avatar' => $file]);
-            } else {
-                $file = str_replace('http://localhost/qlda/file-upload/files/', '', $request->avatar);
-                $request->merge(['avatar' => $file]);
+            $file = explode('/', $request->avatar);
+            for ($x = 0; $x < count($file); $x++) {
+                $filename = $file[$x];
             }
+            $request->merge(['avatar' => $filename]);
         }
         $birthday = $request->year . '-' . $request->month . '-' . $request->day;
         $request->merge(['birthday' => $birthday]);
         $user->update($request->all());
-        return redirect()->route('profile.index', $id)->with('success', @trans('User updated successfully!'));
+        return redirect()->route('profile.index', $id)->with('success', __('User updated successfully!'));
     }
     public function change_password()
     {
@@ -49,12 +43,12 @@ class ProfileController extends Controller
     public function updatePassword(Request $request)
     {
         if (!Hash::check($request->old_password, auth()->user()->password)) {
-            return back()->with("error", @trans("Old Password Doesn't match!"));
+            return back()->with("error", __("Old Password Doesn't match!"));
         }
 
         $this->admin->whereId(auth()->user()->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
-        return back()->with("success", @trans('Password changed successfully!'));
+        return back()->with("success", __('Password changed successfully!'));
     }
 }

@@ -18,33 +18,6 @@ class AuthController extends Controller
     {
         $this->admin = new Admins();
     }
-    public function sign_up()
-    {
-        return view('auth.sign-up');
-    }
-    public function sign_up_action(Request $request)
-    {   
-        $request['password'] = Hash::make($request->password);
-        $file_name = "avatar-user.png";
-        $request->merge(['avatar' => $file_name]);
-        $request->merge(['roles' => AdminRole::employee]);
-        $user_name = $this->admin->where('username', $request->username)->first();
-        if ($user_name != null) {
-            return redirect()->back()->with('error', 'Username is duplicated');
-        }
-        $user_email = $this->admin->where('email', $request->email)->first();
-        if ($user_email != null) {
-            return redirect()->back()->with('error', 'Email is duplicated');
-        }
-        $user_phone = $this->admin->where('phone', $request->phone)->first();
-        if ($user_phone != null) {
-            return redirect()->back()->with('error', 'Phone is duplicated');
-        }
-        $birthday = $request->year . '-' . $request->month . '-' . $request->day;
-        $request->merge(['birthday' => $birthday]);
-        $this->admin->create($request->all());
-        return redirect()->route('sign-in')->with('success', 'Register Access');
-    }
     public function sign_in()
     {
         return view('auth.sign-in');
@@ -58,9 +31,9 @@ class AuthController extends Controller
         $credentials = $request->only('phone', 'email', 'password');
         $field = filter_var($credentials['phone'], FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
         if (Auth::attempt([$field => $credentials['phone'], 'password' => $credentials['password']])) {
-            return redirect()->route('dashboard')->with('success', 'Signed in');
+            return redirect()->route('dashboard')->with('success', __('Signed in'));
         }
-        return redirect("sign-in")->with('error', 'Login details are not valid');
+        return redirect("sign-in")->with('error', __('Login details are not valid'));
     }
     public function sign_out()
     {
@@ -83,9 +56,9 @@ class AuthController extends Controller
                 $email->subject('Reset Password');
                 $email->to($user->email, $user->fullname);
             });
-            return back()->with('success', @trans('Please check your email'));
+            return back()->with('success', __('Please check your email'));
         }
-        return back()->with('error', @trans('This email does not exist in the system!'));
+        return back()->with('error', __('This email does not exist in the system!'));
     }
     public function get_password()
     {
@@ -96,6 +69,6 @@ class AuthController extends Controller
         $admin = $this->admin->FindOrFail($id);
         $password = Hash::make($request->password);
         $admin->update(['password' => $password]);
-        return redirect()->route('sign-in')->with('success', 'Reset password successfully!');
+        return redirect()->route('sign-in')->with('success', __('Reset password successfully!'));
     }
 }

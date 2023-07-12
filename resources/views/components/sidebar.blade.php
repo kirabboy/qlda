@@ -5,7 +5,7 @@
             aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <h1 class="navbar-brand navbar-brand-autodark">
+        <h1 class="navbar-brand">
             <a href="{{ route('dashboard') }}">
                 <img src="{{ asset('dist/img/logomevivumoi.png') }}" width="110" height="32" alt=""
                     class="navbar-brand-image">
@@ -23,7 +23,7 @@
                                             <i class="{{ $sb['icon'] }}"></i>
                                         </span>
                                         <span class="nav-link-title">
-                                            {{__($sb['title']) }}
+                                            {{ __($sb['title']) }}
                                         </span>
                                     </a>
                                 </li>
@@ -36,7 +36,7 @@
                                         </span>
 
                                         <span class="nav-link-title">
-                                            {{__($sb['title']) }}
+                                            {{ __($sb['title']) }}
                                         </span>
                                     </a>
                                     <div class="dropdown-menu" id="navbar-base">

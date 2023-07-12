@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Sign in - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>CMS Manage Project</title>
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css?1674944402') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/tabler-flags.min.css?1674944402') }}" rel="stylesheet" />
@@ -41,50 +41,50 @@
 <script src="{{ asset('dist/js/demo.min.js?1674944402') }}" defer></script>
 <script src="{{ asset('libs/js/jquery.min.js') }}"></script>
 <script src="{{ asset('libs/Parsley/parsley.min.js') }}"></script>
- <!-- Toast Plugin -->
-    <script src="{{ asset('libs/toastr/toastr.js') }}"></script>
-    <script>
-        @if (Session::has('success'))
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "3000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
-            toastr["success"]("{{ Session::get('success') }}", "{{ __('Notification') }}")
-        @endif
-        @if (Session::has('error'))
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "3000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
-            toastr["error"]("{{ Session::get('error') }}", "{{ __('Notification') }}")
-        @endif
-    </script>
+<!-- Toast Plugin -->
+<script src="{{ asset('libs/toastr/toastr.js') }}"></script>
+<script>
+    @if (Session::has('success'))
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr["success"]("{{ Session::get('success') }}", "{{ __('Notification') }}")
+    @endif
+    @if (Session::has('error'))
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr["error"]("{{ Session::get('error') }}", "{{ __('Notification') }}")
+    @endif
+</script>
 
 <script>
     function showPassword(params) {

@@ -1,24 +1,25 @@
 <?php
 
 namespace App\Support;
+
 use Illuminate\Support\Facades\Lang;
 
 trait Enum
 {
     public static function getCases(): array
     {
-       return array_column(self::cases(), 'name');
+        return array_column(self::cases(), 'name');
     }
 
     public static function getValues(): array
     {
-       return array_column(self::cases(), 'value');
+        return array_column(self::cases(), 'value');
     }
 
-    public static function asSelectArray() 
+    public static function asSelectArray()
     {
         $array = [];
-        foreach(self::cases() as $item){
+        foreach (self::cases() as $item) {
             $array[$item->value] = $item->getDescription($item->value);
         }
         return $array;
@@ -39,10 +40,12 @@ trait Enum
 
         return null;
     }
-    protected static function getAttributeDescription($value){
+    protected static function getAttributeDescription($value)
+    {
         return self::from($value)->name;
     }
-    public function description(){
+    public function description()
+    {
         return self::getDescription($this->value);
     }
 

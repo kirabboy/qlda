@@ -18,7 +18,7 @@
                                     <li class="breadcrumb-item active">{{ __('add') }}</li>
                                 </ul>
                             </div>
-                            <div class="card" style="background: #f1f5f9">
+                            <div class="card">
                                 <div class="card-body">
                                     <form action="{{ route('project.report.store') }}" method="POST"
                                         enctype="multipart/form-data" data-parsley-validate id="validate_form_cr">
@@ -134,10 +134,14 @@
                                                         {{ __('File upload') }}
                                                     </div>
                                                     <div class="card-body p-2">
-                                                        <input type="text" class="form-control" name="filename" id="filename" readonly>
-                                                        <input type="text" class="d-none" name="file_size" id="file_size">
-                                                        <input type="text" class="d-none" name="file_path" id="file_path">
-                                                        <input type="text" class="d-none" name="file_type" id="file_type">
+                                                        <input type="text" class="form-control" name="filename"
+                                                            id="filename" readonly>
+                                                        <input type="text" class="d-none" name="file_size"
+                                                            id="file_size">
+                                                        <input type="text" class="d-none" name="file_path"
+                                                            id="file_path">
+                                                        <input type="text" class="d-none" name="file_type"
+                                                            id="file_type">
                                                         <input type="text" class="d-none" name="file_report"
                                                             id="input_img">
                                                         <button type="button" id="image"

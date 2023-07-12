@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AccountController_ton;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadFileController;
@@ -11,10 +10,7 @@ use App\Http\Controllers\LocalizedController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectReportController;
-use App\Models\Employee;
-use CKSource\CKFinder\Command\DownloadFile;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('project-report/edit/{id}', [ProjectReportController::class, 'edit'])->name('project.report.edit');
         Route::put('project-report/update/{id}', [ProjectReportController::class, 'update'])->name('project.report.update');
         Route::delete('project-report/destroy/{id}', [ProjectReportController::class, 'destroy'])->name('project.report.destroy');
-       
+
 
         /* File download */
         Route::get('file-download', [DownloadFileController::class, 'index'])->name('file_download.index');
@@ -61,10 +57,11 @@ Route::middleware(['auth'])->group(function () {
 
         /* Library */
         Route::get('library', [LibraryController::class, 'index'])->name('library.index');
-        Route::put('library-status/{id}' ,[LibraryController::class, 'library_status']);
+        Route::put('library-status/{id}', [LibraryController::class, 'library_status']);
         Route::post('file_download/store', [LibraryController::class, 'store_file_download']);
-        Route::delete('library/destroy/{id}' ,[LibraryController::class, 'destroy'])->name('library.destroy');
-        Route::get('library/edit/{id}' ,[LibraryController::class, 'edit'])->name('library.edit');
+        Route::delete('filedownload/destroy/{id}', [LibraryController::class, 'destroy_file_download']);
+        Route::delete('library/destroy/{id}', [LibraryController::class, 'destroy'])->name('library.destroy');
+        Route::get('library/edit/{id}', [LibraryController::class, 'edit'])->name('library.edit');
         Route::put('library/update/{id}', [LibraryController::class, 'update'])->name('library.update');
         Route::get('library/download/{id}', [LibraryController::class, 'downloadFile'])->name('download.file');
 
@@ -97,10 +94,6 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['guest'])->group(function () {
     Route::get('sign-in', [AuthController::class, 'sign_in'])->name('sign-in');
     Route::post('sign-in', [AuthController::class, 'sign_in_action'])->name('sign-in.action');
-
-    Route::get('sign-up', [AuthController::class, 'sign_up'])->name('sign-up');
-    Route::post('sign-up/store', [AuthController::class, 'sign_up_action'])->name('sign-up.action');
-
     Route::get('forgotpassword', [AuthController::class, 'forgot_password'])->name('forgot.password');
     Route::post('postforgotpassword', [AuthController::class, 'send_gmail'])->name('post.forgot.password');
     Route::get('get-password/{user}', [AuthController::class, 'get_password'])->name('get.password');

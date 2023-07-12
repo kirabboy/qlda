@@ -1,2 +1,50 @@
+.theme-dark {
+    --tblr-body-color: #f8fafc;
+    --tblr-body-color-rgb: 248, 250, 252;
+    --tblr-muted: rgba(153, 159, 164, 1);
+    --tblr-body-bg: #1a2234;
+    --tblr-body-bg-rgb: 26, 34, 52;
+    --tblr-bg-forms: #1a2234;
+    --tblr-bg-surface: #1d273b;
+    --tblr-bg-surface-dark: #1a2234;
+    --tblr-bg-surface-secondary: #202c42;
+    --tblr-bg-surface-tertiary: #1a2234;
+    --tblr-link-color: #307fdd;
+    --tblr-link-hover-color: #206bc4;
+    --tblr-active-bg: #202c42;
+    --tblr-disabled-color: var(--tblr-gray-700);
+    --tblr-card-bg: #1a2234;
+    --tblr-card-bg-hover: #1a2234;
+    --tblr-card-bg-rgb: 26, 34, 52;
+    --tblr-card-color: #f8fafc;
+    --tblr-border-color: var(--tblr-dark-mode-border-color);
+    --tblr-border-color-light: var(--tblr-dark-mode-border-color-light);
+    --tblr-border-color-active: var(--tblr-dark-mode-border-color-active);
+    --tblr-btn-color: #1a2234;
+    --tblr-code-color: var(--tblr-body-color);
+    --tblr-code-bg: #243049;
+    color: #f8fafc;
+    background-color: #1a2234;
+}
 
+.theme-dark .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #f8fafc;
+    line-height: 28px;
+    background-color: #1a2234;
+}
 
+.theme-dark .select2-results {
+    display: block;
+    color: #f8fafc;
+    background-color: #1a2234;
+}
+
+.theme-dark .select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #f8fafc;
+    background-color: #1a2234;
+    color: #f8fafc;
+}
+
+.theme-dark .highcharts-background {
+    fill: #1d273b;
+}

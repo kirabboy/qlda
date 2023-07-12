@@ -36,7 +36,7 @@ class EmployeeController extends Controller
         $request->merge(['birthday' => $birthday]);
         $this->employee->create($request->all());
         $id = $this->employee->max('id');
-        return redirect()->route('employee.edit', $id)->with('success', @trans('Add success'));
+        return redirect()->route('employee.edit', $id)->with('success', __('Add success'));
     }
     public function edit($id)
     {
@@ -52,12 +52,12 @@ class EmployeeController extends Controller
         $birthday = $request->year . '-' . $request->month . '-' . $request->day;
         $request->merge(['birthday' => $birthday]);
         $employee->update($request->all());
-        return redirect()->route('employee.edit', $id)->with('success', @trans('Edit success'));
+        return redirect()->route('employee.edit', $id)->with('success', __('Edit success'));
     }
     public function destroy($id)
     {
         $employee = $this->employee->FindOrFail($id);
         $employee->delete();
-        return redirect()->route('employee.index')->with('success', trans('Delete success'));
+        return redirect()->route('employee.index')->with('success', __('Delete success'));
     }
 }

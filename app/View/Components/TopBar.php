@@ -13,7 +13,6 @@ class TopBar extends Component
      */
     public function __construct()
     {
-        //
     }
 
     /**

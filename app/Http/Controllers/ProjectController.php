@@ -42,20 +42,15 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         if ($request->has('file_upload')) {
-            $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz', 'cgm', 'djv', 'djvu', 'ico', 'ief', 'jpe', 'pbm', 'pgm', 'pnm', 'ppm', 'ras', 'rgb', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'];
-            $explodeImage = explode('.', $request->file_upload);
-            $extension = end($explodeImage);
-            if (in_array($extension, $imageExtensions)) {
-                $file = str_replace('http://localhost/qlda/file-upload/images/', '', $request->file_upload);
-                $request->merge(['file_upload' => $file]);
-            } else {
-                $file = str_replace('http://localhost/qlda/file-upload/files/', '', $request->file_upload);
-                $request->merge(['file_upload' => $file]);
+            $file = explode('/', $request->file_upload);
+            for ($x = 0; $x < count($file); $x++) {
+                $filename = $file[$x];
             }
+            $request->merge(['file_upload' => $filename]);
         }
         $this->model->create($request->all());
         $id = $this->model->max('id');
-        return redirect()->route('project.edit', $id)->with('success', trans('Add success'));
+        return redirect()->route('project.edit', $id)->with('success', __('Add success'));
     }
     public function edit($id)
     {
@@ -72,28 +67,24 @@ class ProjectController extends Controller
     {
         $project = $this->model->FindOrFail($id);
         if ($request->has('file_upload')) {
-            $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz', 'cgm', 'djv', 'djvu', 'ico', 'ief', 'jpe', 'pbm', 'pgm', 'pnm', 'ppm', 'ras', 'rgb', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'];
-            $explodeImage = explode('.', $request->file_upload);
-            $extension = end($explodeImage);
-            if (in_array($extension, $imageExtensions)) {
-                $file = str_replace('http://localhost/qlda/file-upload/images/', '', $request->file_upload);
-                $request->merge(['file_upload' => $file]);
-            } else {
-                $file = str_replace('http://localhost/qlda/file-upload/files/', '', $request->file_upload);
-                $request->merge(['file_upload' => $file]);
+            $file = explode('/', $request->file_upload);
+            for ($x = 0; $x < count($file); $x++) {
+                $filename = $file[$x];
             }
+            $request->merge(['file_upload' => $filename]);
         }
         $project->update($request->all());
-        return back()->with('success', trans('Edit success'));
+        return back()->with('success', __('Edit success'));
     }
     public function destroy($id)
     {
         $project = $this->model->FindOrFail($id);
         $project->delete();
-        return redirect()->route('project.index')->with('success', trans('Delete success'));
+        return redirect()->route('project.index')->with('success', __('Delete success'));
     }
-    
-    public function loadEmployee(){
+
+    public function loadEmployee()
+    {
         $add_employee = $this->employee->all();
         return view('project/add-employee', compact('add_employee'));
     }

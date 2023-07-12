@@ -18,7 +18,7 @@
                                     <li class="breadcrumb-item active">{{ __('Edit') }}</li>
                                 </ul>
                             </div>
-                            <div class="card" style="background: #f1f5f9">
+                            <div class="card">
                                 <div class="card-body">
                                     <form action="{{ route('project.report.update', $project_report->id) }}" method="POST"
                                         enctype="multipart/form-data" data-parsley-validate id="validate_form_cr">
@@ -142,10 +142,17 @@
                                                         {{ __('File upload') }}
                                                     </div>
                                                     <div class="card-body p-2">
-                                                        <input type="text" class="form-control" id="name_file" disabled
-                                                            value="{{ str_replace('/file-upload/', '', $project_report->file_report) }}">
+                                                        <input type="text" class="form-control" name="filename"
+                                                            id="filename" value="{{ $project_report->file_report }}"
+                                                            readonly>
+                                                        <input type="text" class="d-none" name="file_size"
+                                                            id="file_size">
+                                                        <input type="text" class="d-none" name="file_path"
+                                                            id="file_path">
+                                                        <input type="text" class="d-none" name="file_type"
+                                                            id="file_type">
                                                         <input type="text" class="d-none" name="file_report"
-                                                            value="{{ $project_report->file_report }}" id="input_img">
+                                                            id="input_img"value="{{ $project_report->file_report }}">
                                                         <button type="button" id="image"
                                                             class="btn btn-outline-info">{{ __('File upload') }}</button>
                                                     </div>
@@ -161,5 +168,5 @@
             </div>
         </div>
     </div>
-    <x-destroy/>
+    <x-destroy />
 @endsection

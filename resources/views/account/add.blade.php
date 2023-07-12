@@ -18,7 +18,7 @@
                                     <li class="breadcrumb-item active">{{ __('add') }}</li>
                                 </ul>
                             </div>
-                            <div class="card" style="background: #f1f5f9">
+                            <div class="card">
                                 <div class="card-body">
                                     <form action="{{ route('account.store') }}" method="POST" enctype="multipart/form-data"
                                         data-parsley-validate id="validate_form_cr">
@@ -78,9 +78,9 @@
                                                             <label class="control-label">{{ __('Role') }}:</label>
                                                             <select name="roles" class="form-select" required
                                                                 data-parsley-required-message="{{ __('required') }}">
-                                                                <option value="">-- {{ __('Role')}} --</option>
+                                                                <option value="">-- {{ __('Role') }} --</option>
                                                                 <option value="1">{{ __('Employee') }}</option>
-                                                                <option value="2">{{ __('admin_project') }}</option>                                                             
+                                                                <option value="2">{{ __('admin_project') }}</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -160,8 +160,8 @@
                                                                 {{ __('Password') }}
                                                             </label>
                                                             <input name="password" type="password" class="form-control"
-                                                                id="newPasswordInput"
-                                                                placeholder="{{ __('Password') }}" required
+                                                                id="newPasswordInput" placeholder="{{ __('Password') }}"
+                                                                required
                                                                 data-parsley-required-message="{{ __('required') }}">
                                                         </div>
                                                     </div>

@@ -18,7 +18,7 @@
                                     <li class="breadcrumb-item active">{{ __('Edit') }}</li>
                                 </ul>
                             </div>
-                            <div class="card" style="background: #f1f5f9">
+                            <div class="card">
                                 <div class="card-body">
                                     <form action="{{ route('library.update', $library->id) }}" method="POST"
                                         enctype="multipart/form-data" data-parsley-validate id="validate_form_cr">
@@ -30,15 +30,23 @@
                                                     <!-- project_id -->
                                                     <div class="col-6">
                                                         <div class="mb-3">
-                                                            <label class="control-label d-inline">{{ __('project') }}:  <h2 class="d-inline">{{$library->projects->name_project}}</h2></label>      
-                                                           
+                                                            <label class="control-label d-inline">{{ __('project') }}: <h2
+                                                                    class="d-inline">{{ $library->projects->name_project }}
+                                                                </h2></label>
+
                                                         </div>
                                                     </div>
                                                     <!-- project_report_id -->
                                                     <div class="col-6">
                                                         <div class="mb-3">
-                                                            <label class="control-label d-inline">{{ __('project report') }}:  <h2 class="d-inline">{{$library->project_report->title_report}}</h2></label>
-                                                           <input type="text" class="d-none" value="{{$library->project_report->id}}" name="project_report_id">
+                                                            <label
+                                                                class="control-label d-inline">{{ __('project report') }}:
+                                                                <h2 class="d-inline">
+                                                                    {{ $library->project_report->title_report }}</h2>
+                                                                </label>
+                                                            <input type="text" class="d-none"
+                                                                value="{{ $library->project_report->id }}"
+                                                                name="project_report_id">
                                                         </div>
                                                     </div>
                                                     <!-- file upload -->

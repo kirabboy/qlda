@@ -28,10 +28,11 @@ class AccountController extends Controller
         $admin = $this->admin->FindOrFail($id);
         return view('account.detail', compact('admin', 'role'));
     }
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $admin = $this->admin->FindOrFail($id);
         $admin->update(['roles' => $request->roles]);
-        return redirect()->route('account.detail', $id)->with('success', @trans('User updated successfully!'));
+        return redirect()->route('account.detail', $id)->with('success', __('User updated successfully!'));
     }
     public function add()
     {
@@ -42,37 +43,32 @@ class AccountController extends Controller
     {
         $user_name = $this->admin->where('username', $request->username)->first();
         if ($user_name != null) {
-            return redirect()->back()->with('error', @trans('Username is duplicated'));
+            return redirect()->back()->with('error', __('Username is duplicated'));
         }
         $user_email = $this->admin->where('email', $request->email)->first();
         if ($user_email != null) {
-            return redirect()->back()->with('error', @trans('Email is duplicated'));
+            return redirect()->back()->with('error', __('Email is duplicated'));
         }
         $user_phone = $this->admin->where('phone', $request->phone)->first();
         if ($user_phone != null) {
-            return redirect()->back()->with('error', @trans('Phone is duplicated'));
+            return redirect()->back()->with('error', __('Phone is duplicated'));
         }
         if ($request->has('avatar')) {
-            $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz', 'cgm', 'djv', 'djvu', 'ico', 'ief', 'jpe', 'pbm', 'pgm', 'pnm', 'ppm', 'ras', 'rgb', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'];
-            $explodeImage = explode('.', $request->avatar);
-            $extension = end($explodeImage);
-            if (in_array($extension, $imageExtensions)) {
-                $file = str_replace('http://localhost/qlda/file-upload/images/', '', $request->avatar);
-                $request->merge(['avatar' => $file]);
-            } else {
-                $file = str_replace('http://localhost/qlda/file-upload/files/', '', $request->file_upload);
-                $request->merge(['avatar' => $file]);
+            $file = explode('/', $request->avatar);
+            for ($x = 0; $x < count($file); $x++) {
+                $filename = $file[$x];
             }
+            $request->merge(['avatar' => $filename]);
         }
         $birthday = $request->year . '-' . $request->month . '-' . $request->day;
         $request->merge(['birthday' => $birthday]);
         $this->admin->create($request->all());
-        return redirect()->route('account.index')->with('success', @trans('Add success'));
+        return redirect()->route('account.index')->with('success', __('Add success'));
     }
     public function destroy($id)
     {
         $admin = $this->admin->FindOrFail($id);
         $admin->delete();
-        return redirect()->route('account.index')->with('success', trans('Delete success'));
+        return redirect()->route('account.index')->with('success', __('Delete success'));
     }
 }

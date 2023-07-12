@@ -60,6 +60,15 @@ return [
         ]
     ],
     [
+        'title' => 'library',
+        'route' => 'library.index',
+        'icon' => 'fa-solid fa-bookmark',
+        'roles' => [
+            App\Enums\AdminRole::admin_project,
+            App\Enums\AdminRole::supper_admin,
+        ],
+    ],
+    [
         'title' => 'file download',
         'route' => 'file_download.index',
         'icon' => 'fa-sharp fa-solid fa-file-arrow-down',
@@ -67,15 +76,6 @@ return [
             App\Enums\AdminRole::employee,
             App\Enums\AdminRole::supper_admin,
         ]
-    ],
-    [
-        'title' => 'library',
-        'route' => 'library.index',
-        'icon' => 'fa-solid fa-bookmark',
-        'roles' => [
-            App\Enums\AdminRole::admin_project,
-            App\Enums\AdminRole::supper_admin,
-        ], 
     ],
     [
         'title' => 'employee',

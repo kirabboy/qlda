@@ -30,15 +30,15 @@ class DashboardDataTable extends DataTable
      * @return \Yajra\DataTables\EloquentDataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
-    {   
+    {
         return (new EloquentDataTable($query))
             ->editColumn('status', function ($projects) {
                 if ($projects->status->key == $this->projectStatus[0]) {
-                    $status = '<span class="badge bg-green-lt">' . __($this->projectStatus[0]) .'</span>';
+                    $status = '<span class="badge bg-green-lt">' . __($this->projectStatus[0]) . '</span>';
                 } else if ($projects->status->key ==  $this->projectStatus[2]) {
-                    $status = '<span class="badge bg-yellow-lt">' .  __($this->projectStatus[2]) .'</span>';
+                    $status = '<span class="badge bg-yellow-lt">' .  __($this->projectStatus[2]) . '</span>';
                 } else {
-                    $status = '<span class="badge bg-red-lt">' .  __($this->projectStatus[1]) .'</span>';
+                    $status = '<span class="badge bg-red-lt">' .  __($this->projectStatus[1]) . '</span>';
                 }
                 return $status;
             })
@@ -71,11 +71,11 @@ class DashboardDataTable extends DataTable
      * @return \Yajra\DataTables\Html\Builder
      */
     public function html(): HtmlBuilder
-    {    
+    {
         $locale = App::currentLocale();
-        if($locale == 'vi'){
+        if ($locale == 'vi') {
             $url = url('libs/js/vi_datatable.json');
-        }else{
+        } else {
             $url = url('libs/js/en_datatable.json');
         }
         return $this->builder()

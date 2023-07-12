@@ -37,8 +37,5 @@
                         </form>
                     </div>
                 </div>
-                <div class="text-center text-muted mt-3">
-                    {{ __('No account?') }} <a href="{{ route('sign-up') }}" tabindex="-1">{{ __('Sign up') }}</a>
-                </div>
             </div>
         </div>

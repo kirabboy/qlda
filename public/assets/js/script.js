@@ -217,7 +217,7 @@ function searchColumsDataTableAdmins(datatable) {
             input.setAttribute('class', 'form-select');
             $(input).append('<option value="">--' + all + '--</option>');
             $(input).append('<option value="0">' + male + '</option>');
-            $(input).append('<option value="1">' + famale + '</option>');           
+            $(input).append('<option value="1">' + famale + '</option>');
         }
         input.setAttribute('placeholder', placeholder);
         $(input).appendTo($(column.footer()).empty())
@@ -238,10 +238,10 @@ function searchColumsDataTableEmployee(datatable) {
             $(input).append('<option value="">' + all + '</option>');
             $(input).append('<option value="0">' + male + '</option>');
             $(input).append('<option value="1">' + famale + '</option>');
-          
+
         }
         else if (column.selector.cols == 6) {
-            input.setAttribute('type', 'date');       
+            input.setAttribute('type', 'date');
         }
         input.setAttribute('placeholder', placeholder);
         $(input).appendTo($(column.footer()).empty())
@@ -379,6 +379,18 @@ $(document).on('change', 'input.checked_library_status', function (e) {
         cache: false,
         dataType: "json",
         success: function (response) {
+            if (value_status == "1") {
+                $.ajax({
+                    type: "DELETE",
+                    url: 'filedownload/destroy/' + library_id,
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    data: { id: library_id },
+                    cache: false,
+                    dataType: "json",
+                    success: function (response) {
+                    }
+                });
+            }
             if (value_status == "0") {
                 $.ajax({
                     type: "POST",
@@ -391,10 +403,10 @@ $(document).on('change', 'input.checked_library_status', function (e) {
                     }
                 });
             }
-                if (response.status == 400)
-                    window.location.assign("404");
-                else
-                    window.location.assign('library');
+            if (response.status == 400)
+                window.location.assign("404");
+            else
+                window.location.assign('library');
         }
     });
 

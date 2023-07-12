@@ -23,50 +23,75 @@ class LibraryController extends Controller
         $this->status = Librarystatus::getValues();
     }
     public function index(LibraryDataTable $datatable)
-    {           
+    {
         return $datatable->render('library.index');
     }
     public function library_status($id, Request $request)
     {
         $library_status = $this->library->FindOrFail($id);
         if ($library_status) {
-             $library_status->status = $request->status;
-        $library_status->update();
-        return response()->json([
-            'status' => 200,
-            'success' => 'Update successfully!',
-        ]);
-        }else{
+            $library_status->status = $request->status;
+            $library_status->update();
+            return response()->json([
+                'status' => 200,
+                'success' => 'Update successfully!',
+            ]);
+        } else {
             return response()->json([
                 'status' => 400,
                 'error' => 'No update successfully!',
             ]);
         }
     }
-    public function store_file_download(Request $request){
+    public function store_file_download(Request $request)
+    {
         $library = $this->library->FindOrFail($request->id);
         $request->merge(['employee_id' =>  $library->project_report->employee_id]);
         $request->merge(['library_id' => $request->id]);
         $this->file_download->create($request->all());
     }
-    public function destroy($id){
+    public function destroy_file_download(Request $request)
+    {
+        $getIdFileDownload = $this->file_download->where('library_id', $request->id)->get();
+        foreach ($getIdFileDownload as $value) {
+            $getId = $value->id;
+        }
+        // dd($getId);
+        $filedownload = $this->file_download->FindOrFail($getId);
+        if ($filedownload) {
+            $filedownload->delete();
+            return response()->json([
+                'status' => 200,
+                'success' => 'Delete successfully!',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 400,
+                'error' => 'No delete successfully!',
+            ]);
+        }
+    }
+    public function destroy($id)
+    {
         $library = $this->library->FindOrFail($id);
         $library->delete();
-        return redirect()->route('library.index')->with('success', trans('Delete success'));
+        return redirect()->route('library.index')->with('success', __('Delete success'));
     }
-    public function edit($id){
+    public function edit($id)
+    {
         $project = $this->project->all();
         $project_report = $this->project_report->all();
         $library = $this->library->FindOrFail($id);
         return view('library.edit', compact('library', 'project', 'project_report'));
     }
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $library = $this->library->FindOrFail($id);
         $library->update($request->all());
         $request->merge(['file_report' => $request->filename]);
         $project_report = $this->project_report->FindOrFail($request->project_report_id);
         $project_report->update($request->all());
-        return back()->with('success', trans('Edit success'));
+        return back()->with('success', __('Edit success'));
     }
     public function downloadFile($file_report)
     {

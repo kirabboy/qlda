@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>Dashboard</title>
+    <title>CMS Manage Project</title>
 
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css?1674944402') }}" rel="stylesheet" />
@@ -33,14 +33,6 @@
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
         }
-
-        #column_basic {
-            height: 60vh;
-        }
-
-        #pie_gradient {
-            height: 60vh;
-        }
     </style>
 </head>
 
@@ -51,6 +43,7 @@
 
     </div>
     <!-- Tabler Core -->
+
     <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
 
     <script src="{{ asset('dist/js/demo-theme.min.js') }}"></script>
@@ -79,7 +72,7 @@
                 "positionClass": "toast-top-right",
                 "preventDuplicates": false,
                 "onclick": null,
-                "showDuration": "300",
+                "showDuration": "300000",
                 "hideDuration": "500",
                 "timeOut": "2000",
                 "extendedTimeOut": "1000",
@@ -141,14 +134,20 @@
         var employee = "@lang('employee')";
         var male = "@lang('male')";
         var famale = "@lang('female')";
-        
     </script>
-
+    <script>
+        var element = document.querySelector('.theme-dark');
+        if (!element.classList.contains("class")) {
+            var color = '#f8fafc';
+        }
+    </script>
     <!-- Ckeditor & Ckfinder-->
     <script>
         CKEDITOR.replace('ckeditor-content', {
-            filebrowserBrowseUrl: '{{ route('ckfinder_browser') }}'
+            filebrowserBrowseUrl: '{{ route('ckfinder_browser') }}',
+
         });
+        CKEDITOR.addCss('.ckeditor-content { background-color: black; color: white }');
     </script>
     @include('ckfinder::setup')
 
