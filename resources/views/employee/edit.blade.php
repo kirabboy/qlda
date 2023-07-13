@@ -18,7 +18,7 @@
                                     <li class="breadcrumb-item active">{{ __('update') }}</li>
                                 </ul>
                             </div>
-                            <div class="card" style="background: #f1f5f9">
+                            <div class="card">
                                 <div class="card-body">
                                     <form action="{{ route('employee.update', $employee->id) }}" method="POST"
                                         enctype="multipart/form-data" data-parsley-validate id="validate_form_cr">
